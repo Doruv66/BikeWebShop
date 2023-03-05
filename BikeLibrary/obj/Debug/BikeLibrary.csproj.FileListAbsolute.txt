@@ -1,0 +1,6 @@
+\\Mac\Home\Desktop\individual Assigment Semester 2\BikeLibrary\bin\Debug\BikeLibrary.dll
+\\Mac\Home\Desktop\individual Assigment Semester 2\BikeLibrary\bin\Debug\BikeLibrary.pdb
+\\Mac\Home\Desktop\individual Assigment Semester 2\BikeLibrary\obj\Debug\BikeLibrary.csproj.AssemblyReference.cache
+\\Mac\Home\Desktop\individual Assigment Semester 2\BikeLibrary\obj\Debug\BikeLibrary.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\individual Assigment Semester 2\BikeLibrary\obj\Debug\BikeLibrary.dll
+\\Mac\Home\Desktop\individual Assigment Semester 2\BikeLibrary\obj\Debug\BikeLibrary.pdb

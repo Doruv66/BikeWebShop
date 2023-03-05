@@ -1,0 +1,40 @@
+﻿<Properties StartupConfiguration="{B50A7799-8B60-4321-BE03-4629FD26828C}|https">
+  <MonoDevelop.Ide.Workbench ActiveDocument="BikeStore/Pages/Index.cshtml">
+    <Files>
+      <File FileName="BikeStore/Pages/Store.cshtml.cs" Line="23" Column="2" />
+      <File FileName="BikeStore/Models/TouringBike.cs" Line="1" Column="1" />
+      <File FileName="BikeStore/Models/Bike.cs" Line="1" Column="1" />
+      <File FileName="BikeStore/Models/Inventory.cs" Line="85" Column="77" />
+      <File FileName="BikeStore/Pages/Store.cshtml" Line="53" Column="1" />
+      <File FileName="BikeStore/Pages/Index.cshtml" Line="27" Column="70" />
+      <File FileName="BikeStore/Pages/Index.cshtml.cs" Line="21" Column="32" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="BikeStore" expanded="True">
+            <Node name="BikeStore" expanded="True">
+              <Node name="Models" expanded="True" />
+              <Node name="Pages" expanded="True">
+                <Node name="Index.cshtml" expanded="True">
+                  <Node name="Index.cshtml.cs" selected="True" />
+                </Node>
+                <Node name="Store.cshtml" expanded="True" />
+              </Node>
+              <Node name="wwwroot" expanded="True">
+                <Node name="images" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.BikeStore PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
