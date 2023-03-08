@@ -4,6 +4,8 @@ using System;
 
 namespace BikeClassLibrary
 {
+
+	// add the id in the constructor
 	public class Bike : IBike
 	{
 		private int id;
