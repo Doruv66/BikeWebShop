@@ -1,11 +1,11 @@
 ﻿
 
+using BikeLibrary;
 using System;
 
 namespace BikeClassLibrary
 {
 
-	// add the id in the constructor
 	public class Bike : IBike
 	{
 		private int id;
@@ -18,19 +18,26 @@ namespace BikeClassLibrary
 
 		private byte[] imageData;
 
-		private static int nextid = 1;
-		public Bike(string _brand, double _price, int _stock, byte[] _imageData)
+		private BikeType type;
+
+		public Bike(string _brand, double _price, int _stock, byte[] _imageData, BikeType _type)
 		{
-			id = nextid++;
+			id = default(int);
 			brand = _brand;
 			price = _price;
 			stock = _stock;
 			imageData = _imageData;
+			type = _type;
 		}
 
 		public int GetId()
 		{
 			return this.id;
+		}
+
+		public void SetId(int _id)
+		{
+			id = _id;
 		}
 
 		public double GetPrice()
@@ -71,6 +78,11 @@ namespace BikeClassLibrary
 		public string GetBrand()
 		{
 			return brand;
+		}
+
+		public BikeType GetBikeType()
+		{
+			return type;
 		}
  
 	}

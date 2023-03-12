@@ -1,4 +1,5 @@
 ﻿using BikeClassLibrary;
+using BikeLibrary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +21,7 @@ namespace UniverseBikeHome
 		public AddForm()
 		{
 			InitializeComponent();
+			FillComboBox();
 		}
 
 		
@@ -27,14 +29,14 @@ namespace UniverseBikeHome
 		{
 			using(MemoryStream ms = new MemoryStream())
 			{
-				image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-				return ms.ToArray();
+				image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+				return ms.GetBuffer();
 			}
 		}
 
 		private void txtImage_DoubleClick(object sender, EventArgs e)
 		{
-			using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Image files(*.jpg;*.jpeg)|*.jpg;*.jpeg", Multiselect = false })
+			using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Image files|*.png", Multiselect = false })
 			{
 				if(ofd.ShowDialog() == DialogResult.OK)
 				{
@@ -50,34 +52,38 @@ namespace UniverseBikeHome
 			{
 					if (cbKind.SelectedIndex == 0)
 					{
-						HomePage.shopInventory.AddBike(new MountainBike(txtBrand.Text,
+						HomePage.dbhelper.AddNewBike(new MountainBike(txtBrand.Text,
 							Convert.ToDouble(txtPrice.Text),
 							Convert.ToInt32(txtStock.Text),
 							ConvertImageToBytes(pbNewBike.Image),
+							BikeType.MountainBike,
 							Convert.ToInt32(txtSuspension.Text)));
 					}
 					if (cbKind.SelectedIndex == 1)
 					{
-						HomePage.shopInventory.AddBike(new ElectricBike(txtBrand.Text,
+						HomePage.dbhelper.AddNewBike(new ElectricBike(txtBrand.Text,
 							Convert.ToDouble(txtPrice.Text),
 							Convert.ToInt32(txtStock.Text),
 							ConvertImageToBytes(pbNewBike.Image),
+							BikeType.ElectricBike,
 							Convert.ToInt32(txtBattery.Text)));
 					}
 					if (cbKind.SelectedIndex == 2)
 					{
-						HomePage.shopInventory.AddBike(new CityBike(txtBrand.Text,
+						HomePage.dbhelper.AddNewBike(new CityBike(txtBrand.Text,
 							Convert.ToDouble(txtPrice.Text),
 							Convert.ToInt32(txtStock.Text),
 							ConvertImageToBytes(pbNewBike.Image),
+							BikeType.CityBike,
 							GetLights()));
 					}
 					if (cbKind.SelectedIndex == 3)
 					{
-						HomePage.shopInventory.AddBike(new TouringBike(txtBrand.Text,
+						HomePage.dbhelper.AddNewBike(new TouringBike(txtBrand.Text,
 							Convert.ToDouble(txtPrice.Text),
 							Convert.ToInt32(txtStock.Text),
 							ConvertImageToBytes(pbNewBike.Image),
+							BikeType.TouringBike,
 							Convert.ToInt32(txtBags.Text)));
 					}
 					ClearText();
@@ -162,6 +168,15 @@ namespace UniverseBikeHome
 			txtBattery.Clear();
 			txtBags.Clear();
 			pbNewBike.Image = null;
+		}
+
+		public void FillComboBox()
+		{
+			cbKind.Items.Clear();
+			foreach(var type in Enum.GetValues(typeof(BikeType)))
+			{
+				cbKind.Items.Add(type.ToString());
+			}
 		}
 	}
 }

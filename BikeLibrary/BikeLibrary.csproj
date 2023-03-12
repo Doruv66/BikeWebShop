@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bike.cs" />
+    <Compile Include="BikeType.cs" />
     <Compile Include="CityBike.cs" />
     <Compile Include="DBHelper.cs" />
     <Compile Include="ElectricBike.cs" />

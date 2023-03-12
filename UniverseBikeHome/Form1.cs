@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BikeClassLibrary;
-
+using BikeLibrary;
 
 namespace UniverseBikeHome
 {
@@ -16,12 +16,17 @@ namespace UniverseBikeHome
 	{
 		public static Inventory shopInventory;
 
+		public static DBHelper dbhelper;
+
 		public static int nrOfPage = 1;
 
 		public HomePage()
 		{
 			InitializeComponent();
+			dbhelper = new DBHelper();
 			shopInventory = new Inventory();
+			shopInventory.SetBikes(DBHelper.GetAllBikes());
+			FillWithbikes(nrOfPage);
 		}
 
 		private void btnAddBike_Click(object sender, EventArgs e)
@@ -32,15 +37,31 @@ namespace UniverseBikeHome
 
 		public void FillWithbikes(int nrofpage)
 		{
+			shopInventory.SetBikes(DBHelper.GetAllBikes());
 			List<Bike> bikesforpage = shopInventory.GetBikesForPage(nrofpage);
 			BikeUserControl ucbike;
 			BikeContainer.Controls.Clear();
-			for (int i = 0; i < bikesforpage.Count; i++)
+			if (bikesforpage != null)
 			{
-				ucbike = new BikeUserControl(bikesforpage[i]);
-				BikeContainer.Controls.Add(ucbike);
+				for (int i = 0; i < bikesforpage.Count; i++)
+				{
+					ucbike = new BikeUserControl(bikesforpage[i]);
+					BikeContainer.Controls.Add(ucbike);
+				}
 			}
-			
+			if (shopInventory.GetBikesForPage(nrOfPage + 1) == null)
+			{
+				btnNext.Hide();
+			}
+			else
+			{
+				btnNext.Show();
+			}
+
+			if(nrOfPage == 1)
+			{
+				btnPrevious.Hide();
+			}	
 		}
 
 		private void btnRefreh_Click(object sender, EventArgs e)
@@ -51,27 +72,15 @@ namespace UniverseBikeHome
 		private void btnNext_Click(object sender, EventArgs e)
 		{
 			nrOfPage++;
-			List<Bike> bikesforpage = shopInventory.GetBikesForPage(nrOfPage);
-			BikeUserControl ucbike;
-			BikeContainer.Controls.Clear();
-			for (int i = 0; i < bikesforpage.Count; i++)
-			{
-				ucbike = new BikeUserControl(bikesforpage[i]);
-				BikeContainer.Controls.Add(ucbike);
-			}
+			FillWithbikes(nrOfPage);
+			btnPrevious.Show();
 		}
 
 		private void btnPrevious_Click(object sender, EventArgs e)
 		{
 			nrOfPage--;
-			List<Bike> bikesforpage = shopInventory.GetBikesForPage(nrOfPage);
-			BikeUserControl ucbike;
-			BikeContainer.Controls.Clear();
-			for (int i = 0; i < bikesforpage.Count; i++)
-			{
-				ucbike = new BikeUserControl(bikesforpage[i]);
-				BikeContainer.Controls.Add(ucbike);
-			}
+			FillWithbikes(nrOfPage);
+			btnNext.Show();
 		}
 	}
 }

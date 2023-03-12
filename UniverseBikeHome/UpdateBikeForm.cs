@@ -36,8 +36,8 @@ namespace UniverseBikeHome
 		{
 			using (MemoryStream ms = new MemoryStream())
 			{
-				image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-				return ms.ToArray();
+				image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+				return ms.GetBuffer();
 			}
 		}
 
@@ -51,7 +51,7 @@ namespace UniverseBikeHome
 
 		private void txtImage_DoubleClick(object sender, EventArgs e)
 		{
-			using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Image files(*.jpg;*.jpeg)|*.jpg;*.jpeg", Multiselect = false })
+			using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Image files|*.png", Multiselect = false })
 			{
 				if (ofd.ShowDialog() == DialogResult.OK)
 				{
@@ -63,7 +63,7 @@ namespace UniverseBikeHome
 
 		private void btnUpdate_Click(object sender, EventArgs e)
 		{
-			HomePage.shopInventory.UpdateBike(bike.GetId(),
+			HomePage.dbhelper.UpdateBike(bike.GetId(),
 				Convert.ToDouble(txtPrice.Text),
 				Convert.ToInt32(txtStock.Text),
 				ConvertImageToBytes(pbNewBike.Image));

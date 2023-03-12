@@ -1,3 +1,4 @@
+using BikeLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace BikeClassLibrary
 		public Inventory() 
 		{
 			bikes = new List<Bike>();
+		}
+
+		public void SetBikes(List<Bike> _bikes)
+		{
+			bikes = _bikes;
 		}
 
 		public void AddBike(Bike bike)
@@ -65,7 +71,7 @@ namespace BikeClassLibrary
 			int bikesPerPage = 6;
 			int start = (page - 1) * bikesPerPage;
 			int end = start + bikesPerPage;
-			if(start >= bikes.Count || start < 0) {return new List<Bike>();}
+			if(start >= bikes.Count || start < 0) { return null; }
 			if(end > bikes.Count){end = bikes.Count;}
 			return bikes.GetRange(start, end-start);
 		}

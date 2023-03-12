@@ -39,7 +39,7 @@ namespace UniverseBikeHome
 
 		private void btnDelete_Click(object sender, EventArgs e)
 		{
-			HomePage.shopInventory.RemoveBike(bike.GetId());
+			HomePage.dbhelper.DeleteBike(bike.GetId());
 			HomePage home = (HomePage)this.ParentForm;
 			home.FillWithbikes(HomePage.nrOfPage);
 		}
