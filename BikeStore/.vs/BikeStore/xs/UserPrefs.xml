@@ -1,5 +1,7 @@
 ﻿<Properties StartupConfiguration="{A0E7C06F-D660-462B-B81C-C2897B277E82}|https">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workbench ActiveDocument="Pages/Store.cshtml">
     <Files>
       <File FileName="Pages/Store.cshtml" Line="13" Column="7" />
@@ -9,19 +11,15 @@
         <State name="__root__">
           <Node name="BikeStore" expanded="True">
             <Node name="BikeStore" expanded="True">
-              <Node name="Pages" expanded="True">
-                <Node name="Store.cshtml" selected="True" />
-              </Node>
+              <Node name="Pages" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.BikeStore PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

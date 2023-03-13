@@ -21,7 +21,6 @@ namespace UniverseBikeHome
 			InitializeComponent();
 			bike = _bike;
 			SetUp();
-
 		}
 
 		public void SetUp()
@@ -36,9 +35,11 @@ namespace UniverseBikeHome
 		{
 			using (MemoryStream ms = new MemoryStream())
 			{
-				image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-				return ms.GetBuffer();
+				Bitmap bm = new Bitmap(image);
+				bm.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+				return ms.ToArray();
 			}
+			
 		}
 
 		public Image ConvertBytesToImage(byte[] imageData)
@@ -70,7 +71,5 @@ namespace UniverseBikeHome
 			MessageBox.Show("Updated");
 			this.Close();
 		}
-
-		
 	}
 }

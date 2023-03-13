@@ -78,7 +78,7 @@
 			// lblPrice
 			// 
 			this.lblPrice.AutoSize = true;
-			this.lblPrice.Location = new System.Drawing.Point(101, 282);
+			this.lblPrice.Location = new System.Drawing.Point(78, 280);
 			this.lblPrice.Name = "lblPrice";
 			this.lblPrice.Size = new System.Drawing.Size(70, 25);
 			this.lblPrice.TabIndex = 7;
@@ -87,7 +87,7 @@
 			// lblBrand
 			// 
 			this.lblBrand.AutoSize = true;
-			this.lblBrand.Location = new System.Drawing.Point(101, 257);
+			this.lblBrand.Location = new System.Drawing.Point(78, 255);
 			this.lblBrand.Name = "lblBrand";
 			this.lblBrand.Size = new System.Drawing.Size(70, 25);
 			this.lblBrand.TabIndex = 8;
@@ -96,7 +96,7 @@
 			// lblStock
 			// 
 			this.lblStock.AutoSize = true;
-			this.lblStock.Location = new System.Drawing.Point(101, 307);
+			this.lblStock.Location = new System.Drawing.Point(78, 305);
 			this.lblStock.Name = "lblStock";
 			this.lblStock.Size = new System.Drawing.Size(70, 25);
 			this.lblStock.TabIndex = 9;

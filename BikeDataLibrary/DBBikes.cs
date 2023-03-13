@@ -1,22 +1,22 @@
 ﻿using BikeClassLibrary;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
 
-namespace BikeLibrary
+namespace BikeDataLibrary
 {
-	public class DBHelper
-	{
+    public class DBBikes
+    {
 		private const string connStr = "Data Source=mssqlstud.fhict.local; Initial Catalog=dbi507644_managestu;User ID=dbi507644_managestu;Password=Otilia_1995";
 
-		public DBHelper()
+		public DBBikes()
 		{
 		}
 
-		public static List<Bike> GetAllBikes()
+		public List<Bike> GetAllBikes()
 		{
 			var bikelist = new List<Bike>();
 			try
@@ -89,7 +89,7 @@ namespace BikeLibrary
 
 					command.Parameters.AddWithValue("@Price", price);
 					command.Parameters.AddWithValue("@Stock", stock);
-					command.Parameters.AddWithValue("@ImageData",imgData);
+					command.Parameters.AddWithValue("@ImageData", imgData);
 					command.Parameters.AddWithValue("@Id", id);
 
 					connection.Open();
@@ -244,3 +244,4 @@ namespace BikeLibrary
 		}
 	}
 }
+

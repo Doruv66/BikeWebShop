@@ -1,5 +1,4 @@
 ﻿using BikeClassLibrary;
-using BikeLibrary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,7 +32,7 @@ namespace UniverseBikeHome
 				return ms.GetBuffer();
 			}
 		}
-
+		
 		private void txtImage_DoubleClick(object sender, EventArgs e)
 		{
 			using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Image files|*.png", Multiselect = false })

@@ -109,6 +109,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BikeDataLibrary\BikeDataLibrary.csproj">
+      <Project>{0f59e116-5f13-4805-af34-518ebc78d997}</Project>
+      <Name>BikeDataLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BikeLibrary\BikeLibrary.csproj">
       <Project>{8762ba87-d642-4471-85ad-00eedbfcbf6e}</Project>
       <Name>BikeLibrary</Name>

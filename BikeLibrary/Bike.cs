@@ -1,6 +1,4 @@
 ﻿
-
-using BikeLibrary;
 using System;
 
 namespace BikeClassLibrary
