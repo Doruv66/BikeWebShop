@@ -8,7 +8,7 @@ public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
 
-    public Inventory invenotory;
+    public static Inventory inventory;
 
     public IndexModel(ILogger<IndexModel> logger)
     {
@@ -17,8 +17,8 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-        invenotory = new Inventory();
-        invenotory.MockBikes();
+        inventory = new Inventory();
+        inventory.MockBikes();
     }
 }
 

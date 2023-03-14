@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "MhEaqDsDqe5x2n5Skj5bA2/T9OoHLzJQQuYWV2cA5B8=",
+  "Hash": "YBBlqRtc4lfqnIR1qX0ichVafLYJ4WNC4bYXpBiR1mA=",
   "Source": "BikeStore",
   "BasePath": "_content/BikeStore",
   "Mode": "Default",
@@ -117,6 +117,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/.DS_Store"
+    },
+    {
+      "Identity": "/Users/doruvieru/Desktop/individual Assigment Semester 2/BikeStore/wwwroot/images/Background2.png",
+      "SourceId": "BikeStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/doruvieru/Desktop/individual Assigment Semester 2/BikeStore/wwwroot/",
+      "BasePath": "_content/BikeStore",
+      "RelativePath": "images/Background2.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/Background2.png"
+    },
+    {
+      "Identity": "/Users/doruvieru/Desktop/individual Assigment Semester 2/BikeStore/wwwroot/images/BackGroundBikePage.png",
+      "SourceId": "BikeStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/doruvieru/Desktop/individual Assigment Semester 2/BikeStore/wwwroot/",
+      "BasePath": "_content/BikeStore",
+      "RelativePath": "images/BackGroundBikePage.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/BackGroundBikePage.png"
     },
     {
       "Identity": "/Users/doruvieru/Desktop/individual Assigment Semester 2/BikeStore/wwwroot/images/Banner.png",
@@ -236,6 +270,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/shoppingCart.png"
+    },
+    {
+      "Identity": "/Users/doruvieru/Desktop/individual Assigment Semester 2/BikeStore/wwwroot/images/ShopSign.png",
+      "SourceId": "BikeStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/doruvieru/Desktop/individual Assigment Semester 2/BikeStore/wwwroot/",
+      "BasePath": "_content/BikeStore",
+      "RelativePath": "images/ShopSign.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/ShopSign.png"
     },
     {
       "Identity": "/Users/doruvieru/Desktop/individual Assigment Semester 2/BikeStore/wwwroot/js/site.js",

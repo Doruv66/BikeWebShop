@@ -21,6 +21,14 @@
       "PackagePath": "staticwebassets/images/.DS_Store"
     },
     {
+      "Id": "/Users/doruvieru/Desktop/individual Assigment Semester 2/BikeStore/wwwroot/images/BackGroundBikePage.png",
+      "PackagePath": "staticwebassets/images/BackGroundBikePage.png"
+    },
+    {
+      "Id": "/Users/doruvieru/Desktop/individual Assigment Semester 2/BikeStore/wwwroot/images/Background2.png",
+      "PackagePath": "staticwebassets/images/Background2.png"
+    },
+    {
       "Id": "/Users/doruvieru/Desktop/individual Assigment Semester 2/BikeStore/wwwroot/images/Banner.png",
       "PackagePath": "staticwebassets/images/Banner.png"
     },
@@ -31,6 +39,10 @@
     {
       "Id": "/Users/doruvieru/Desktop/individual Assigment Semester 2/BikeStore/wwwroot/images/ElectricBike.png",
       "PackagePath": "staticwebassets/images/ElectricBike.png"
+    },
+    {
+      "Id": "/Users/doruvieru/Desktop/individual Assigment Semester 2/BikeStore/wwwroot/images/ShopSign.png",
+      "PackagePath": "staticwebassets/images/ShopSign.png"
     },
     {
       "Id": "/Users/doruvieru/Desktop/individual Assigment Semester 2/BikeStore/wwwroot/images/bikeuniverslogo.png",
