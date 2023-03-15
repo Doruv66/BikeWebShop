@@ -51,7 +51,7 @@ namespace UniverseBikeHome
 			{
 					if (cbKind.SelectedIndex == 0)
 					{
-						HomePage.dbhelper.AddNewBike(new MountainBike(txtBrand.Text,
+						HomePage.shopInventory.AddBike(new MountainBike(txtBrand.Text,
 							Convert.ToDouble(txtPrice.Text),
 							Convert.ToInt32(txtStock.Text),
 							ConvertImageToBytes(pbNewBike.Image),
@@ -60,7 +60,7 @@ namespace UniverseBikeHome
 					}
 					if (cbKind.SelectedIndex == 1)
 					{
-						HomePage.dbhelper.AddNewBike(new ElectricBike(txtBrand.Text,
+						HomePage.shopInventory.AddBike(new ElectricBike(txtBrand.Text,
 							Convert.ToDouble(txtPrice.Text),
 							Convert.ToInt32(txtStock.Text),
 							ConvertImageToBytes(pbNewBike.Image),
@@ -69,7 +69,7 @@ namespace UniverseBikeHome
 					}
 					if (cbKind.SelectedIndex == 2)
 					{
-						HomePage.dbhelper.AddNewBike(new CityBike(txtBrand.Text,
+						HomePage.shopInventory.AddBike(new CityBike(txtBrand.Text,
 							Convert.ToDouble(txtPrice.Text),
 							Convert.ToInt32(txtStock.Text),
 							ConvertImageToBytes(pbNewBike.Image),
@@ -78,7 +78,7 @@ namespace UniverseBikeHome
 					}
 					if (cbKind.SelectedIndex == 3)
 					{
-						HomePage.dbhelper.AddNewBike(new TouringBike(txtBrand.Text,
+						HomePage.shopInventory.AddBike(new TouringBike(txtBrand.Text,
 							Convert.ToDouble(txtPrice.Text),
 							Convert.ToInt32(txtStock.Text),
 							ConvertImageToBytes(pbNewBike.Image),

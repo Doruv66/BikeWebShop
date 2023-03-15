@@ -64,7 +64,7 @@ namespace UniverseBikeHome
 
 		private void btnUpdate_Click(object sender, EventArgs e)
 		{
-			HomePage.dbhelper.UpdateBike(bike.GetId(),
+			HomePage.shopInventory.UpdateBike(bike.GetId(),
 				Convert.ToDouble(txtPrice.Text),
 				Convert.ToInt32(txtStock.Text),
 				ConvertImageToBytes(pbNewBike.Image));

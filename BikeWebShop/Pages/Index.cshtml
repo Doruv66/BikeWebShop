@@ -1,0 +1,49 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 text-center" style="background-image: url('/images/cycleuniverseBackGround.png'); height: 700px; background-position: center; background-size: cover; ">
+            <img src="/images/Banner.png" alt="Company Logo" style="margin-top:20px;  margin-bottom: 20px; max-height:150px;" />
+            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></svg>
+                        <img src="~/Images/bikeuniverselogo" width="100%" height="100%" />
+                        <div class="container">
+                            <div class="carousel-caption text-start">
+                                <h1>Latest Bikes in the store</h1>
+                            </div>
+                        </div>
+                    </div>
+                    @foreach (var bike in Model.inventory.GetBikesForHome())
+                    {
+                        <div class="carousel-item">
+
+                            <img src="data:image;base64,@System.Convert.ToBase64String(@bike.GetImageData())" width="100%" height="100%" alt="@bike.GetBrand()" />
+                            <div class="container">
+                                <div class="carousel-caption text-start text-dark">
+                                    <h1>@bike.GetBrand()</h1>
+                                    <p>@bike.GetPrice() &euro;</p>
+                                    <p><a class="btn btn-lg btn-dark" href="#">View more</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

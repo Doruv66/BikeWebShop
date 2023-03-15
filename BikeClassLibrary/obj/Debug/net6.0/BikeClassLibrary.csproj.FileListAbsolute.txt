@@ -1,0 +1,5 @@
+\\Mac\Home\Desktop\individual Assigment Semester 2\BikeClassLibrary\obj\Debug\net6.0\BikeClassLibrary.csproj.AssemblyReference.cache
+\\Mac\Home\Desktop\individual Assigment Semester 2\BikeClassLibrary\obj\Debug\net6.0\BikeClassLibrary.GeneratedMSBuildEditorConfig.editorconfig
+\\Mac\Home\Desktop\individual Assigment Semester 2\BikeClassLibrary\obj\Debug\net6.0\BikeClassLibrary.AssemblyInfoInputs.cache
+\\Mac\Home\Desktop\individual Assigment Semester 2\BikeClassLibrary\obj\Debug\net6.0\BikeClassLibrary.AssemblyInfo.cs
+\\Mac\Home\Desktop\individual Assigment Semester 2\BikeClassLibrary\obj\Debug\net6.0\BikeClassLibrary.csproj.CoreCompileInputs.cache
