@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BikeDataLibrary;
 using BikeClassLibrary;
+using BikeClassLibrary.DBL;
 
 
 namespace UniverseBikeHome
@@ -17,16 +17,12 @@ namespace UniverseBikeHome
 	{
 		public static Inventory shopInventory;
 
-		public static DBBikes dbhelper;
-
 		public static int nrOfPage = 1;
 
 		public HomePage()
 		{
 			InitializeComponent();
-			dbhelper = new DBBikes();
 			shopInventory = new Inventory();
-			shopInventory.SetBikes(dbhelper.GetAllBikes());
 			FillWithbikes(nrOfPage);
 		}
 
@@ -38,7 +34,7 @@ namespace UniverseBikeHome
 
 		public void FillWithbikes(int nrofpage)
 		{
-			shopInventory.SetBikes(dbhelper.GetAllBikes());
+
 			List<Bike> bikesforpage = shopInventory.GetBikesForPage(nrofpage);
 			BikeUserControl ucbike;
 			BikeContainer.Controls.Clear();
