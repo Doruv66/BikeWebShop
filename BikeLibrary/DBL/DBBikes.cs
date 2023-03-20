@@ -5,16 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using BikeClassLibrary;
 using System.Data.SqlClient;
-
+using BikeLibrary.DBL;
 
 namespace BikeClassLibrary.DBL
 {
 	public class DBBikes
 	{
-		private const string connStr = "Data Source=mssqlstud.fhict.local; Initial Catalog=dbi507644_managestu;User ID=dbi507644_managestu;Password=Otilia_1995";
+		private readonly string connStr;
 
-		public DBBikes()
+		public DBBikes(string connstr)
 		{
+			this.connStr = connstr;
 		}
 
 		public List<Bike> GetAllBikes()

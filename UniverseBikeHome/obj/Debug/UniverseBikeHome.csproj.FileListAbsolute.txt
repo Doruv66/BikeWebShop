@@ -16,3 +16,5 @@
 \\Mac\Home\Desktop\individual Assigment Semester 2\UniverseBikeHome\obj\Debug\UniverseBikeHome.BikeUserControl.resources
 \\Mac\Home\Desktop\individual Assigment Semester 2\UniverseBikeHome\obj\Debug\UniverseBikeHome.UpdateBikeForm.resources
 \\Mac\Home\Desktop\individual Assigment Semester 2\UniverseBikeHome\bin\Debug\BikeLibrary.dll.config
+\\Mac\Home\Desktop\individual Assigment Semester 2\UniverseBikeHome\bin\Debug\System.Data.SqlClient.dll
+\\Mac\Home\Desktop\individual Assigment Semester 2\UniverseBikeHome\bin\Debug\System.Data.SqlClient.xml

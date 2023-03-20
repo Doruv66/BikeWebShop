@@ -14,9 +14,12 @@ namespace BikeClassLibrary
 
 		private DBBikes dbbikes;
 
+		private ConStr conn;
+
 		public Inventory() 
 		{
-			dbbikes = new DBBikes();
+			conn = new ConStr();
+			dbbikes = new DBBikes(conn.GetConnectionString());
 			bikes = dbbikes.GetAllBikes();
 		}
 
