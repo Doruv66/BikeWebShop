@@ -8,43 +8,30 @@
         <div class="col-3 justify-content-left">
             <div class="border border-aqua rounded p-4">
                 <h4>Filter:</h4>
-                <form>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="mountainBike" name="mountainBike" value="true">
-                        <label class="form-check-label" for="mountainBike">
-                            Mountain Bike
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="electricBike" name="electricBike" value="true">
-                        <label class="form-check-label" for="electricBike">
-                            Electric Bike
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="touringBike" name="touringBike" value="true">
-                        <label class="form-check-label" for="touringBike">
-                            Touring Bike
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="cityBike" name="cityBike" value="true">
-                        <label class="form-check-label" for="cityBike">
-                            City Bike
-                        </label>
-                    </div>
+                <form method="post" id="filter-form">
+                    @foreach (var type in Model.inventory.GetBikesType())
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="Types" id="@System.Convert.ToInt32(type)" value="@System.Convert.ToInt32(type)" onchange="submitForm()">
+                            <label class="form-check-label" for="@System.Convert.ToInt32(type)">
+                                @type.ToString()
+                            </label>
+                        </div>
+                    }
                 </form>
             </div>
         </div>
         <div class="col-9">
-            <div class="input-group">
-                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                <button type="button" class="btn btn-outline-dark">search</button>
-            </div>
+            <form method="get">
+                <div class="input-group">
+                    <input class="form-control rounded" asp-for="SearchedTerm" placeholder="Search" />
+                    <button type="submit" class="btn btn-outline-dark">search</button>
+                </div>
+            </form>
             <div class="album py-5 bg-light">
                 <div class="container">
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        @foreach (var bike in Model.inventory.GetBikes())
+                        @foreach (var bike in Model.Catalog)
                         {
                             <div class="col">
                                 <div class="card shadow-sm">
@@ -70,3 +57,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    function submitForm() {
+        document.getElementById("filter-form").submit();
+    }
+</script>

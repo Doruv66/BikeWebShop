@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using BikeClassLibrary;
 using System.Data.SqlClient;
-using BikeLibrary.DBL;
 
 namespace BikeClassLibrary.DBL
 {

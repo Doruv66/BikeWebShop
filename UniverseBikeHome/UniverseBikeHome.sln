@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniverseBikeHome", "Univers
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeLibrary", "..\BikeLibrary\BikeLibrary.csproj", "{8762BA87-D642-4471-85AD-00EEDBFCBF6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeWebShop", "..\BikeWebShop\BikeWebShop.csproj", "{C616EDED-8837-491F-94FF-AD9835BA4BF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeWebShop", "..\BikeWebShop\BikeWebShop.csproj", "{C616EDED-8837-491F-94FF-AD9835BA4BF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeUniverseTests", "..\BikeUniverseTests\BikeUniverseTests.csproj", "{AE88414C-50D0-4C1C-A187-EEE25EF4A711}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{C616EDED-8837-491F-94FF-AD9835BA4BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C616EDED-8837-491F-94FF-AD9835BA4BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C616EDED-8837-491F-94FF-AD9835BA4BF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE88414C-50D0-4C1C-A187-EEE25EF4A711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE88414C-50D0-4C1C-A187-EEE25EF4A711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE88414C-50D0-4C1C-A187-EEE25EF4A711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE88414C-50D0-4C1C-A187-EEE25EF4A711}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

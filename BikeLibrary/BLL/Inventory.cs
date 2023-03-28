@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 using BikeClassLibrary.DBL;
 
 namespace BikeClassLibrary
@@ -56,13 +57,12 @@ namespace BikeClassLibrary
 
 		public Bike GetBike(int id)
 		{
-			foreach(var bike in bikes)
+			foreach(Bike bike in bikes)
 			{
 				if(bike.GetId() == id)
 				{
 					return bike;
 				}
-			
 			}
 			throw new Exception("Not Found");
 		}
@@ -88,6 +88,35 @@ namespace BikeClassLibrary
 		private void SetBikes()
 		{
 			bikes = dbbikes.GetAllBikes();
+		}
+
+        public List<Bike> GetBikesBySearch(int[] types, string search)
+        {
+            if (string.IsNullOrEmpty(search) && types.Count() == 0) { return bikes; }
+            List<Bike> searchedBikes = new List<Bike>();
+            foreach (Bike bike in bikes)
+            {
+                if (!string.IsNullOrEmpty(search) && !bike.GetBrand().ToLower().Contains(search.ToLower()))
+                {
+                    continue;
+                }
+                if (types.Count() > 0 && !types.Contains(Convert.ToInt32(bike.GetBikeType())))
+                {
+                    continue;
+                }
+                searchedBikes.Add(bike);
+            }
+            return searchedBikes;
+        }
+
+        public List<BikeType> GetBikesType()
+		{
+			List<BikeType> bikeTypes = new List<BikeType>();
+			foreach(var type in Enum.GetValues(typeof(BikeType)))
+			{
+				bikeTypes.Add((BikeType)type);
+			}
+			return bikeTypes;
 		}
 	}
 
