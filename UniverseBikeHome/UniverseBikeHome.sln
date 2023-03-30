@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeLibrary", "..\BikeLibra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeWebShop", "..\BikeWebShop\BikeWebShop.csproj", "{C616EDED-8837-491F-94FF-AD9835BA4BF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeUniverseTests", "..\BikeUniverseTests\BikeUniverseTests.csproj", "{AE88414C-50D0-4C1C-A187-EEE25EF4A711}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeUniverseTests", "..\BikeUniverseTests\BikeUniverseTests.csproj", "{AE88414C-50D0-4C1C-A187-EEE25EF4A711}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

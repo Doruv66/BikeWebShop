@@ -8,26 +8,21 @@ namespace BikeLibrary.BLL
 {
     public class Account
     {
-        private string username;
+        public int id { get; private set; }
 
-        private string password;
+        public byte[] password { get; private set; }
 
-        private string email;
+        public byte[] salt { get; private set; }
 
-        private string phone;
+        public string email { get; private set; }
 
-        private string address;
 
-        private shoppingCart shoppingCart;
-
-        public Account(string username, string password, string email, string phone, string address)
+        public Account(int id, byte[] password, byte[] salt, string email)
         {
-            this.username = username;
+            this.id = id;
             this.password = password;
+            this.salt = salt;
             this.email = email;
-            this.phone = phone;
-            this.address = address;
-            this.shoppingCart = new shoppingCart();
         }
 
         public bool login()

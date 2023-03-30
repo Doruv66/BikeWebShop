@@ -9,19 +9,19 @@ namespace BikeLibrary.BLL
 {
     public class Item
     {
-        private Bike bike;
+        public int bikeid { get; set; }
 
-        private int quantity;
+        public int quantity { get; set; }
 
-        public Item(Bike bike, int quantity)
+        public Item()
         {
-            this.bike = bike;
-            this.quantity = quantity;
+
         }
 
-        public double GetTotalPrice()
+        public Item(int bikeid, int quantity)
         {
-            return bike.GetPrice()*quantity;
+            this.bikeid = bikeid;
+            this.quantity = quantity;
         }
     }
 }

@@ -22,13 +22,11 @@ namespace BikeLibrary.BLL
         public void AddItem(Item item)
         {
             items.Add(item);
-            toatalPrice += item.GetTotalPrice();
         }
 
         public void RemoveItem(Item item)
         {
             items.Remove(item);
-            toatalPrice -= item.GetTotalPrice();
         }
 
         public List<Item> GetAllItems()

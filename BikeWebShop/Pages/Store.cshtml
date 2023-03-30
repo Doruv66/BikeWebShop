@@ -11,10 +11,14 @@
                 <form method="post" id="filter-form">
                     @foreach (var type in Model.inventory.GetBikesType())
                     {
+                        var memberInfo = typeof(BikeClassLibrary.BikeType).GetMember(type.ToString());
+                        var descriptionAttribute = memberInfo[0].GetCustomAttributes(typeof(System.ComponentModel.DescriptionAttribute), false).FirstOrDefault() as System.ComponentModel.DescriptionAttribute;
+                        var description = descriptionAttribute != null ? descriptionAttribute.Description : type.ToString();
+
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="Types" id="@System.Convert.ToInt32(type)" value="@System.Convert.ToInt32(type)" onchange="submitForm()">
                             <label class="form-check-label" for="@System.Convert.ToInt32(type)">
-                                @type.ToString()
+                                @description
                             </label>
                         </div>
                     }
@@ -44,7 +48,7 @@
                                         <div class="d-flex justify-content-between align-items-center m-1">
                                             <div class="btn-group m-1">
                                                 <a asp-area="" asp-page="BikePage" asp-route-id="@bike.GetId()" class="btn btn-sm btn-outline-secondary">View More</a>
-                                                <a asp-page="BikePage" asp-route-id="@bike.GetId()" class="btn btn-sm btn-outline-secondary">Add to cart</a>
+                                                <a asp-page="ShoppingCart" asp-page-handler="addtocart" asp-route-id="@bike.GetId()" class="btn btn-sm btn-outline-secondary">Add to cart</a>
                                             </div>
                                         </div>
                                     </div>
@@ -60,6 +64,30 @@
 
 <script>
     function submitForm() {
+        // Save the state of the checked checkboxes in local storage
+        var checkedBoxes = document.querySelectorAll('input[name="Types"]:checked');
+        checkedBoxes.forEach(function (box) {
+            localStorage.setItem(box.value, true);
+        });
+
+        // Submit the form
         document.getElementById("filter-form").submit();
     }
+
+    // Restore the state of the checkboxes from local storage when the page is loaded
+    document.addEventListener("DOMContentLoaded", function () {
+        var checkboxes = document.querySelectorAll('input[name="Types"]');
+        checkboxes.forEach(function (box) {
+            if (localStorage.getItem(box.value) === "true") {
+                box.checked = true;
+            }
+
+            // Add event listener to each checkbox to handle unchecking
+            box.addEventListener('change', function (event) {
+                if (!event.target.checked) {
+                    localStorage.removeItem(event.target.value);
+                }
+            });
+        });
+    });
 </script>

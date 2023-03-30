@@ -28,8 +28,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[//Mac/Home/Desktop/individual Assigment Semester 2/BikeWebShop/Pages/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[//Mac/Home/Desktop/individual Assigment Semester 2/BikeWebShop/Pages/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nb3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [//Mac/Home/Desktop/individual Assigment Semester 2/BikeWebShop/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[//Mac/Home/Desktop/individual Assigment Semester 2/BikeWebShop/Pages/Registration.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0cmF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[//Mac/Home/Desktop/individual Assigment Semester 2/BikeWebShop/Pages/Shared/_LoginStatusPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9Mb2dpblN0YXR1c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [//Mac/Home/Desktop/individual Assigment Semester 2/BikeWebShop/Pages/Shared/_ValidationScriptsPartial.cshtml]

@@ -19,10 +19,10 @@
                     <span>@Model.bike.GetPrice() &euro;</span>
                 </div>
                 <div class="d-flex">
-                    <input class="form-control text-center me-3" id="inputQuantity" type="number" value="1" style="max-width: 3rem" />
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                        <i class="bi-cart-fill me-1"></i>
-                        Add to cart
+                    <button class="btn btn-outline-dark flex-shrink-0 bg-dark text-black" type="button">
+                        <a asp-page="ShoppingCart" asp-page-handler="addtocart" asp-route-id="@Model.bike.GetId()" class="btn btn-dark">
+                                Add to cart
+                        </a>
                     </button>
                 </div>
             </div>
