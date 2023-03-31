@@ -13,17 +13,18 @@
             </div>
             <div class="col-md-6 col-e">
                 <h1 class="display-5 fw-bolder">@Model.bike.GetBrand()</h1>
-
                 <div class="fs-5 mb-5">
                     <div class="small mb-1">@Model.bike.GetBikeType()</div>
                     <span>@Model.bike.GetPrice() &euro;</span>
                 </div>
-                <div class="d-flex">
-                    <button class="btn btn-outline-dark flex-shrink-0 bg-dark text-black" type="button">
-                        <a asp-page="ShoppingCart" asp-page-handler="addtocart" asp-route-id="@Model.bike.GetId()" class="btn btn-dark">
-                                Add to cart
-                        </a>
-                    </button>
+                <div class="fs-5 mb-5 d-flex align-items-center">
+                    <div class="input-group input-group-sm">
+                        <button class="btn btn-outline-dark flex-shrink-0 bg-dark text-black" type="button">
+                            <a asp-page="ShoppingCart" asp-page-handler="addtocart" asp-route-id="@Model.bike.GetId()" class="btn btn-dark">
+                                 Add to cart
+                             </a>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

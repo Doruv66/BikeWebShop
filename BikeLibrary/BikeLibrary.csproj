@@ -239,7 +239,6 @@
     <Compile Include="BLL\Inventory.cs" />
     <Compile Include="BLL\Item.cs" />
     <Compile Include="BLL\MountainBike.cs" />
-    <Compile Include="BLL\shoppingCart.cs" />
     <Compile Include="DBL\ConStr.cs" />
     <Compile Include="DBL\DBBikes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

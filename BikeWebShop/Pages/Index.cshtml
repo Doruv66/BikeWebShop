@@ -10,26 +10,22 @@
             <img src="/images/Banner.png" alt="Company Logo" style="margin-top:20px;  margin-bottom: 20px; max-height:150px;" />
             <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></svg>
-                        <img src="~/Images/bikeuniverselogo" width="100%" height="100%" />
+                    <div class="carousel-item active bg-white">
+                        <img src="/images/BackGroundBikePage.png">
                         <div class="container">
-                            <div class="carousel-caption text-start">
+                            <div class="carousel-caption text-start text-dark">
                                 <h1>Latest Bikes in the store</h1>
                             </div>
                         </div>
                     </div>
                     @foreach (var bike in Model.inventory.GetBikesForHome())
                     {
-                        <div class="carousel-item">
-
+                        <div class="carousel-item position-relative">
                             <img src="data:image;base64,@System.Convert.ToBase64String(@bike.GetImageData())" width="100%" height="100%" alt="@bike.GetBrand()" />
-                            <div class="container">
-                                <div class="carousel-caption text-start text-dark">
-                                    <h1>@bike.GetBrand()</h1>
-                                    <p>@bike.GetPrice() &euro;</p>
-                                    <p><a class="btn btn-lg btn-dark" href="#">View more</a></p>
-                                </div>
+                            <div class="carousel-caption position-absolute top-0 start-0 text-dark">
+                                <h1>@bike.GetBrand()</h1>
+                                <p>@bike.GetPrice() &euro;</p>
+                                <p><a class="btn btn-lg btn-dark" asp-page="/BikePage" asp-route-id="@bike.GetId()">View more</a></p>
                             </div>
                         </div>
                     }
