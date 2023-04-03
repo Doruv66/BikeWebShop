@@ -241,6 +241,7 @@
     <Compile Include="BLL\MountainBike.cs" />
     <Compile Include="DBL\ConStr.cs" />
     <Compile Include="DBL\DBBikes.cs" />
+    <Compile Include="DBL\IBikeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BLL\TouringBike.cs" />
   </ItemGroup>

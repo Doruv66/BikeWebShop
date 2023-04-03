@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using BikeClassLibrary;
 using System.Data.SqlClient;
+using BikeLibrary.DBL;
 
 namespace BikeClassLibrary.DBL
 {
-	public class DBBikes
+	public class DBBikes : IBikeRepository
 	{
 		private readonly string connStr;
 
@@ -106,25 +107,33 @@ namespace BikeClassLibrary.DBL
 			}
 		}
 
-		public bool DeleteBike(int id)
-		{
-			try
-			{
-				using (SqlConnection conn = new SqlConnection(connStr))
-				{
-					string sql = $"Delete from AllBikes where Id=@id;";
-					SqlCommand cmd = new SqlCommand(sql, conn);
+        public bool DeleteBike(int id)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    string sql = @"
+                    BEGIN TRAN;
+                    DELETE FROM MountainBikes WHERE Id = @id;
+                    DELETE FROM CityBikes WHERE Id = @id;
+                    DELETE FROM TouringBikes WHERE Id = @id;
+                    DELETE FROM ElectricBikes WHERE Id = @id;
+                    DELETE FROM AllBikes WHERE Id = @id;
+                    COMMIT TRAN;";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@id", id);
-					conn.Open();
-					int rowsAffected = cmd.ExecuteNonQuery();
-					return rowsAffected > 0;
-				}
-			}
-			catch (Exception ex)
-			{
-				return false;
-			}
-		}
+                    conn.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+    
 
 		public Bike GetBike(int id)
 		{
