@@ -27,6 +27,8 @@
                                     <label class="form-label" asp-for="login.Password">Password</label>
                                 </div>
 
+                                <p class="mb-0 text-center">@Model.ErrorMessage</p>
+
                                 <div class="d-flex justify-content-center">
                                     <button type="submit"
                                             class="btn btn-dark btn-block btn-lg gradient-custom-4 text-body text-white-50">

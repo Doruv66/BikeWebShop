@@ -25,16 +25,6 @@ namespace BikeLibrary.BLL
             this.email = email;
         }
 
-        public bool login()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool logout()
-        {
-            throw new NotImplementedException();
-        }
-
         
     }
 }

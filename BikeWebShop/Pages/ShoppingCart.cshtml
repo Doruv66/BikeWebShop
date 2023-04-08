@@ -45,13 +45,17 @@
                     <h1>No Items in cart Yet</h1>
                 }
 
-        <div class="card">
-          <div class="card-body">
-            <button type="button" class="btn btn-warning btn-block btn-lg">Proceed to Pay</button>
-                        <h4>Total Price: @Model.Total &euro;</h4>
-          </div>
-         
-        </div>
+                @if(Model.cart != null)
+                {
+                    <div class="card">
+                        <div class="card-body text-black">
+                            <button type="button" class="btn btn-dark btn-block btn-lg">
+                                <a class="text-decoration-none text-white" asp-area="" asp-page="/Checkout">Proceed to Pay</a>
+                            </button>
+                            <h4>Total Price: @Model.Total &euro;</h4>
+                        </div>
+                    </div>
+                }
 
       </div>
     </div>

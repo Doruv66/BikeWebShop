@@ -48,3 +48,4 @@
 \\Mac\Home\Desktop\individual Assigment Semester 2\UniverseBikeHome\bin\Debug\Microsoft.AspNetCore.Http.Abstractions.xml
 \\Mac\Home\Desktop\individual Assigment Semester 2\UniverseBikeHome\bin\Debug\Microsoft.Net.Http.Headers.xml
 \\Mac\Home\Desktop\individual Assigment Semester 2\UniverseBikeHome\bin\Debug\Microsoft.Extensions.FileProviders.Abstractions.xml
+\\Mac\Home\Desktop\individual Assigment Semester 2\UniverseBikeHome\obj\Debug\UniverseBikeHome.Login.resources

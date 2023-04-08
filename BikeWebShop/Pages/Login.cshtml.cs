@@ -15,6 +15,9 @@ namespace BikeWebShop.Pages
 
         private CycleService service;
 
+        [TempData]
+        public string ErrorMessage { get; set; }
+
         public void OnGet()
         {
         }
@@ -37,6 +40,14 @@ namespace BikeWebShop.Pages
                         HttpContext.SignInAsync(new ClaimsPrincipal(claimsIdentity));
                         return RedirectToPage("/Index");
                     }
+                    else
+                    {
+                        ErrorMessage = "Incorrect Passsword";
+                    }
+                }
+                else
+                {
+                    ErrorMessage = "Incorrect Login";
                 }
 
             }

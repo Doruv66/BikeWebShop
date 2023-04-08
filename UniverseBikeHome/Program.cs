@@ -16,7 +16,7 @@ namespace UniverseBikeHome
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new HomePage());
+			Application.Run(new Login());
 		}
 	}
 }
