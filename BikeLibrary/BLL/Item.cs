@@ -23,5 +23,10 @@ namespace BikeLibrary.BLL
             this.bikeid = bikeid;
             this.quantity = quantity;
         }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

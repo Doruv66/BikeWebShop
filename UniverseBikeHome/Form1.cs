@@ -79,5 +79,11 @@ namespace UniverseBikeHome
 			FillWithbikes(nrOfPage);
 			btnNext.Show();
 		}
-	}
+
+        private void btnOrders_Click(object sender, EventArgs e)
+        {
+			Orders form = new Orders();
+			form.Show();
+        }
+    }
 }

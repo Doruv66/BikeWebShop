@@ -61,7 +61,7 @@ namespace BikeClassLibrary.DBL
                                 bikeList.Add(bike);
                                 break;
                             case BikeType.MountainBike:
-                                int suspension = Convert.ToInt32(reader["Suspension"]);
+                                int suspension = Convert.ToInt16(reader["Suspension"]);
                                 bike = new MountainBike(brand, price, stock, imageData, bikeType, suspension);
                                 bike.SetId(id);
                                 bikeList.Add(bike);
@@ -86,18 +86,18 @@ namespace BikeClassLibrary.DBL
 		{
 			try
 			{
-				using (SqlConnection connection = new SqlConnection(connStr))
+				using (SqlConnection conn = new SqlConnection(connStr))
 				{
 					string sql = "UPDATE AllBikes SET Price=@Price, Stock=@Stock, ImageData=@ImageData WHERE Id=@Id;";
-					SqlCommand command = new SqlCommand(sql, connection);
+					SqlCommand cmd = new SqlCommand(sql, conn);
 
-					command.Parameters.AddWithValue("@Price", price);
-					command.Parameters.AddWithValue("@Stock", stock);
-					command.Parameters.AddWithValue("@ImageData", imgData);
-					command.Parameters.AddWithValue("@Id", id);
+					cmd.Parameters.AddWithValue("@Price", price);
+					cmd.Parameters.AddWithValue("@Stock", stock);
+					cmd.Parameters.AddWithValue("@ImageData", imgData);
+					cmd.Parameters.AddWithValue("@Id", id);
 
-					connection.Open();
-					int rowsAffected = command.ExecuteNonQuery();
+					conn.Open();
+					int rowsAffected = cmd.ExecuteNonQuery();
 					return rowsAffected > 0;
 				}
 			}
@@ -244,13 +244,11 @@ namespace BikeClassLibrary.DBL
                             insertMountainBikeCmd.ExecuteNonQuery();
                             break;
                     }
-
                     return true;
                 }
             }
-            catch (Exception ex)
+            catch 
             {
-                // handle exception
                 return false;
             }
         }
