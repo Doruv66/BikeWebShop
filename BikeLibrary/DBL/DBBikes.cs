@@ -203,8 +203,6 @@ namespace BikeClassLibrary.DBL
                 using (SqlConnection connection = new SqlConnection(connStr))
                 {
                     connection.Open();
-
-                    // create command to insert bike into Bikes table
                     string insertBikeSql = "INSERT INTO AllBikes (Brand, Price, Stock, ImageData, Type) VALUES (@Brand, @Price, @Stock, @ImageData, @Type); SELECT SCOPE_IDENTITY();";
                     SqlCommand insertBikeCmd = new SqlCommand(insertBikeSql, connection);
                     insertBikeCmd.Parameters.AddWithValue("@Brand", bike.GetBrand());
@@ -212,11 +210,7 @@ namespace BikeClassLibrary.DBL
                     insertBikeCmd.Parameters.AddWithValue("@Stock", bike.GetStock());
                     insertBikeCmd.Parameters.AddWithValue("@ImageData", bike.GetImageData());
                     insertBikeCmd.Parameters.AddWithValue("@Type", bike.GetBikeType());
-
-                    // execute the insert command and get the newly inserted bike's ID
                     int newBikeId = Convert.ToInt32(insertBikeCmd.ExecuteScalar());
-
-                    // create commands to insert bike into the corresponding child table based on its type
                     switch (bike)
                     {
                         case CityBike cityBike:

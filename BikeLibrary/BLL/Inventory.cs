@@ -6,11 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Schema;
 using BikeClassLibrary.DBL;
+using BikeLibrary.BLL.Interfaces;
 using BikeLibrary.DBL;
 
 namespace BikeClassLibrary
 {
-	public class Inventory
+	public class Inventory : IInventory
 	{
 		private List<Bike> bikes;
 
@@ -110,7 +111,7 @@ namespace BikeClassLibrary
             return searchedBikes;
         }
 
-        public List<BikeType> GetBikesType()
+        public List<BikeType> GetBikeTypes()
 		{
 			List<BikeType> bikeTypes = new List<BikeType>();
 			foreach(var type in Enum.GetValues(typeof(BikeType)))
@@ -119,6 +120,6 @@ namespace BikeClassLibrary
 			}
 			return bikeTypes;
 		}
-	}
+    }
 
 }

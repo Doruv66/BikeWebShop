@@ -20,21 +20,23 @@ namespace BikeWebShop.Pages
 
         public void OnGet()
         {
-            List<Item> cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
+            Cart cart = new Cart();
+            cart.SetItems(SessionHelper.GetObjectFromJson(HttpContext.Session, "cart"));
             Inventory = new Inventory();
-            Total = cart.Sum(i => Inventory.GetBike(i.bikeid).GetPrice() * i.quantity);
+            Total = cart.GetTotalPrice();
         }
 
         public IActionResult OnPost()
         {
             orderService= new OrderService();
             int accid = Convert.ToInt32(User.FindFirst("id").Value);
-            List<Item> cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
+            Cart cart = new Cart();
+            cart.SetItems(SessionHelper.GetObjectFromJson(HttpContext.Session, "cart"));
             if (ModelState.IsValid)
             {
-                orderService.AddOrder(new Order(1, orderInfo.Name, orderInfo.LastName, orderInfo.Address, orderInfo.PostalCode, "placed", accid, cart));
+                orderService.AddOrder(new Order(1, orderInfo.Name, orderInfo.LastName, orderInfo.Address, orderInfo.PostalCode, "placed", accid, cart.Getitems()));
                 cart.Clear();
-				SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+				SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart.Getitems());
                 return RedirectToPage("Index");
             }
             return Page();

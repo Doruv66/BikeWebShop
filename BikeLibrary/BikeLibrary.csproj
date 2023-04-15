@@ -228,6 +228,7 @@
     <Compile Include="BLL\Account.cs" />
     <Compile Include="BLL\Bike.cs" />
     <Compile Include="BLL\BikeType.cs" />
+    <Compile Include="BLL\Cart.cs" />
     <Compile Include="BLL\CityBike.cs" />
     <Compile Include="BLL\OrderItem.cs" />
     <Compile Include="BLL\CycleService.cs" />
@@ -238,15 +239,15 @@
     <Compile Include="BLL\SessionHelper.cs" />
     <Compile Include="DBL\DBAccounts.cs" />
     <Compile Include="DBL\DBOrders.cs" />
-    <Compile Include="DBL\IAccountRepository.cs" />
-    <Compile Include="BLL\IBike.cs" />
+    <Compile Include="DBL\Interfaces\IAccountRepository.cs" />
+    <Compile Include="BLL\Interfaces\IBike.cs" />
     <Compile Include="BLL\Inventory.cs" />
     <Compile Include="BLL\Item.cs" />
     <Compile Include="BLL\MountainBike.cs" />
     <Compile Include="DBL\ConStr.cs" />
     <Compile Include="DBL\DBBikes.cs" />
-    <Compile Include="DBL\IBikeRepository.cs" />
-    <Compile Include="DBL\IOrderRepository.cs" />
+    <Compile Include="DBL\Interfaces\IBikeRepository.cs" />
+    <Compile Include="DBL\Interfaces\IOrderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BLL\TouringBike.cs" />
   </ItemGroup>
