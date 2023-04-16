@@ -99,7 +99,7 @@
             this.btnNext.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNext.Location = new System.Drawing.Point(1320, 1093);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(146, 32);
+            this.btnNext.Size = new System.Drawing.Size(155, 46);
             this.btnNext.TabIndex = 5;
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = false;
@@ -112,7 +112,7 @@
             this.btnPrevious.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrevious.Location = new System.Drawing.Point(1148, 1093);
             this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.Size = new System.Drawing.Size(146, 32);
+            this.btnPrevious.Size = new System.Drawing.Size(155, 46);
             this.btnPrevious.TabIndex = 6;
             this.btnPrevious.Text = "Previous";
             this.btnPrevious.UseVisualStyleBackColor = false;

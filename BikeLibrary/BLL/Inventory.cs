@@ -15,58 +15,37 @@ namespace BikeClassLibrary
 	{
 		private List<Bike> bikes;
 
-		private DBBikes dbbikes;
+		private IBikeRepository dbbikes;
 
-		private ConStr conn;
-
-		public Inventory() 
+		public Inventory(IBikeRepository _dbbikes) 
 		{
-			conn = new ConStr();
-			dbbikes = new DBBikes(conn.GetConnectionString());
-			bikes = dbbikes.GetAllBikes();
+			dbbikes = _dbbikes;
 		}
 
 		public void AddBike(Bike bike)
 		{
 			dbbikes.AddNewBike(bike);
-			SetBikes();
 		}
 
 		public List<Bike> GetBikes()
 		{
-			return bikes;
+			return dbbikes.GetAllBikes();
 		}
 
 		public List<Bike> GetBikesForHome()
 		{
-			int count = bikes.Count;
-			if (count >= 3)
-			{
-				return bikes.GetRange(count - 3, 3);
-			}
-			else
-			{
-				return bikes;
-			}
+			return dbbikes.GetLastBikes();
 		}
 
 
 		public void RemoveBike(int id)
 		{
 			dbbikes.DeleteBike(id);
-			SetBikes();
 		}
 
 		public Bike GetBike(int id)
 		{
-			foreach(Bike bike in bikes)
-			{
-				if(bike.GetId() == id)
-				{
-					return bike;
-				}
-			}
-			throw new Exception("Not Found");
+			return dbbikes.GetBike(id);
 		}
 
 
@@ -79,6 +58,7 @@ namespace BikeClassLibrary
 
 		public List<Bike> GetBikesForPage(int page)
 		{
+			SetBikes();
 			int bikesPerPage = 6;
 			int start = (page - 1) * bikesPerPage;
 			int end = start + bikesPerPage;
@@ -94,9 +74,10 @@ namespace BikeClassLibrary
 
         public List<Bike> GetBikesBySearch(int[] types, string search)
         {
+			bikes = dbbikes.GetAllBikes();
             if (string.IsNullOrEmpty(search) && types.Count() == 0) { return bikes; }
             List<Bike> searchedBikes = new List<Bike>();
-            foreach (Bike bike in bikes)
+            foreach (Bike bike in dbbikes.GetAllBikes())
             {
                 if (!string.IsNullOrEmpty(search) && !bike.GetBrand().ToLower().Contains(search.ToLower()))
                 {
@@ -111,7 +92,7 @@ namespace BikeClassLibrary
             return searchedBikes;
         }
 
-        public List<BikeType> GetBikeTypes()
+        public List<BikeType> GetBikesType()
 		{
 			List<BikeType> bikeTypes = new List<BikeType>();
 			foreach(var type in Enum.GetValues(typeof(BikeType)))

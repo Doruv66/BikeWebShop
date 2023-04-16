@@ -52,11 +52,6 @@ namespace BikeLibrary.BLL
 
         public double GetTotalPrice()
         {
-            Inventory inventory = new Inventory();
-            if(items.Count > 0)
-            {
-                return items.Sum(i => inventory.GetBike(i.bikeid).GetPrice());
-            }
             return 0;
         }
 

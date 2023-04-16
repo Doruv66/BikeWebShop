@@ -1,4 +1,10 @@
+using BikeClassLibrary;
+using BikeClassLibrary.DBL;
+using BikeLibrary.BLL;
+using BikeLibrary.BLL.Interfaces;
+using BikeLibrary.DBL;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Connections;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +23,12 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+var connString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddTransient<IAccountRepository>(s => new DBAccounts(connString));
+builder.Services.AddTransient<IBikeRepository>(s => new DBBikes(connString));
+builder.Services.AddTransient<IInventory, Inventory>();
+builder.Services.AddTransient<IAccountService, AccountService>();
 
 
 var app = builder.Build();

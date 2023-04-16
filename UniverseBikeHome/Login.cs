@@ -1,4 +1,5 @@
 ﻿using BikeLibrary.BLL;
+using BikeLibrary.BLL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,11 +14,11 @@ namespace UniverseBikeHome
 {
     public partial class Login : Form
     {
-        CycleService service;
-        public Login()
+        IAccountService service;
+        public Login(IAccountService _service)
         {
             InitializeComponent();
-            service = new CycleService();
+            service = _service;
         }
 
         private void Login_Load(object sender, EventArgs e)

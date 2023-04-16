@@ -44,31 +44,26 @@ namespace BikeClassLibrary.DBL
                         {
                             case BikeType.CityBike:
                                 bool lights = (bool)reader["Lights"];
-                                bike = new CityBike(brand, price, stock, imageData, bikeType, lights);
-                                bike.SetId(id);
+                                bike = new CityBike(id, brand, price, stock, imageData, bikeType, lights);
                                 bikeList.Add(bike);
                                 break;
                             case BikeType.ElectricBike:
                                 int batteryCapacity = (int)reader["BatteryCapacity"];
-                                bike = new ElectricBike(brand, price, stock, imageData, bikeType, batteryCapacity);
-                                bike.SetId(id);
+                                bike = new ElectricBike(id, brand, price, stock, imageData, bikeType, batteryCapacity);
                                 bikeList.Add(bike);
                                 break;
                             case BikeType.TouringBike:
                                 int nrBags = (int)reader["NrBags"];
-                                bike = new TouringBike(brand, price, stock, imageData, bikeType, nrBags);
-                                bike.SetId(id);
+                                bike = new TouringBike(id, brand, price, stock, imageData, bikeType, nrBags);
                                 bikeList.Add(bike);
                                 break;
                             case BikeType.MountainBike:
                                 int suspension = Convert.ToInt16(reader["Suspension"]);
-                                bike = new MountainBike(brand, price, stock, imageData, bikeType, suspension);
-                                bike.SetId(id);
+                                bike = new MountainBike(id, brand, price, stock, imageData, bikeType, suspension);
                                 bikeList.Add(bike);
                                 break;
                             default:
-                                bike = new Bike(brand, price, stock, imageData, bikeType);
-                                bike.SetId(id);
+                                bike = new Bike(id, brand, price, stock, imageData, bikeType);
                                 bikeList.Add(bike);
                                 break;
                         }
@@ -142,13 +137,14 @@ namespace BikeClassLibrary.DBL
 			{
 				using (SqlConnection conn = new SqlConnection(connStr))
 				{
-					string sql = $"select * from Bikes where id={id};";
+					string sql = $"select * from AllBikes LEFT JOIN CityBikes ON AllBikes.Id = CityBikes.Id LEFT JOIN ElectricBikes ON AllBikes.Id = ElectricBikes.Id LEFT JOIN TouringBikes ON AllBikes.Id = TouringBikes.Id LEFT JOIN MountainBikes ON AllBikes.Id = MountainBikes.Id where AllBikes.id=@id;";
 					SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@id", id);
 					conn.Open();
 					SqlDataReader reader = cmd.ExecuteReader();
 					if (reader.Read())
-					{
-						string brand = (string)reader["Brand"];
+                    {
+                        string brand = (string)reader["Brand"];
 						double price = (double)reader["Price"];
 						int stock = (int)reader["Stock"];
 						byte[] imageData = (byte[])reader["ImageData"];
@@ -158,27 +154,22 @@ namespace BikeClassLibrary.DBL
 						{
 							case BikeType.CityBike:
 								bool lights = (bool)reader["Lights"];
-								bike = new CityBike(brand, price, stock, imageData, type, lights);
-								bike.SetId(id);
+								bike = new CityBike(id, brand, price, stock, imageData, type, lights);
 								break;
 							case BikeType.ElectricBike:
 								int batteryCapacity = (int)reader["BatteryCapacity"];
-								bike = new ElectricBike(brand, price, stock, imageData, type, batteryCapacity);
-								bike.SetId(id);
+								bike = new ElectricBike(id, brand, price, stock, imageData, type, batteryCapacity);
 								break;
 							case BikeType.TouringBike:
 								int nrBags = (int)reader["NrBags"];
-								bike = new TouringBike(brand, price, stock, imageData, type, nrBags);
-								bike.SetId(id);
+								bike = new TouringBike(id, brand, price, stock, imageData, type, nrBags);
 								break;
 							case BikeType.MountainBike:
 								int suspension = (int)reader["Suspension"];
-								bike = new MountainBike(brand, price, stock, imageData, type, suspension);
-								bike.SetId(id);
+								bike = new MountainBike(id, brand, price, stock, imageData, type, suspension);
 								break;
 							default:
-								bike = new Bike(brand, price, stock, imageData, type);
-								bike.SetId(id);
+								bike = new Bike(id, brand, price, stock, imageData, type);
 								break;
 						}
 
@@ -245,6 +236,70 @@ namespace BikeClassLibrary.DBL
             {
                 return false;
             }
+        }
+
+        public List<Bike> GetLastBikes()
+        {
+            var bikeList = new List<Bike>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    string sql = "SELECT TOP 3 * FROM AllBikes LEFT JOIN CityBikes ON AllBikes.Id = CityBikes.Id LEFT JOIN ElectricBikes ON AllBikes.Id = ElectricBikes.Id LEFT JOIN TouringBikes ON AllBikes.Id = TouringBikes.Id LEFT JOIN MountainBikes ON AllBikes.Id = MountainBikes.Id ORDER BY AllBikes.Id DESC;";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    conn.Open();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int id = (int)reader["Id"];
+                        string brand = (string)reader["Brand"];
+                        double price = (double)Convert.ToDouble(reader["Price"]);
+                        int stock = (int)reader["Stock"];
+                        byte[] imageData = reader.GetSqlBytes(reader.GetOrdinal("ImageData")).Buffer;
+                        BikeType bikeType = (BikeType)Enum.Parse(typeof(BikeType), reader["Type"].ToString());
+
+                        Bike bike;
+                        switch (bikeType)
+                        {
+                            case BikeType.CityBike:
+                                bool lights = (bool)reader["Lights"];
+                                bike = new CityBike(id, brand, price, stock, imageData, bikeType, lights);
+                                bike.SetId(id);
+                                bikeList.Add(bike);
+                                break;
+                            case BikeType.ElectricBike:
+                                int batteryCapacity = (int)reader["BatteryCapacity"];
+                                bike = new ElectricBike(id, brand, price, stock, imageData, bikeType, batteryCapacity);
+                                bike.SetId(id);
+                                bikeList.Add(bike);
+                                break;
+                            case BikeType.TouringBike:
+                                int nrBags = (int)reader["NrBags"];
+                                bike = new TouringBike(id, brand, price, stock, imageData, bikeType, nrBags);
+                                bike.SetId(id);
+                                bikeList.Add(bike);
+                                break;
+                            case BikeType.MountainBike:
+                                int suspension = Convert.ToInt16(reader["Suspension"]);
+                                bike = new MountainBike(id, brand, price, stock, imageData, bikeType, suspension);
+                                bike.SetId(id);
+                                bikeList.Add(bike);
+                                break;
+                            default:
+                                bike = new Bike(id, brand, price, stock, imageData, bikeType);
+                                bike.SetId(id);
+                                bikeList.Add(bike);
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return bikeList;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -9,21 +10,22 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BikeClassLibrary;
 using BikeClassLibrary.DBL;
-
+using BikeLibrary.BLL.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace UniverseBikeHome
 {
 	public partial class HomePage : Form
 	{
-		public static Inventory shopInventory;
+		public static IInventory shopInventory;
 
 		public static int nrOfPage = 1;
 
 		public HomePage()
 		{
 			InitializeComponent();
-			shopInventory = new Inventory();
-			FillWithbikes(nrOfPage);
+			shopInventory = Program.ServiceProvider.GetRequiredService<IInventory>();	
+            FillWithbikes(nrOfPage);
 		}
 
 		private void btnAddBike_Click(object sender, EventArgs e)

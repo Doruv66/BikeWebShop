@@ -226,16 +226,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\Account.cs" />
-    <Compile Include="BLL\Bike.cs" />
-    <Compile Include="BLL\BikeType.cs" />
+    <Compile Include="BLL\Bikes\Bike.cs" />
+    <Compile Include="BLL\Bikes\BikeType.cs" />
     <Compile Include="BLL\Cart.cs" />
-    <Compile Include="BLL\CityBike.cs" />
-    <Compile Include="BLL\OrderItem.cs" />
-    <Compile Include="BLL\CycleService.cs" />
-    <Compile Include="BLL\ElectricBike.cs" />
+    <Compile Include="BLL\Bikes\CityBike.cs" />
+    <Compile Include="BLL\Interfaces\IAccountService.cs" />
+    <Compile Include="BLL\Interfaces\IInventory.cs" />
+    <Compile Include="BLL\AccountService.cs" />
+    <Compile Include="BLL\Bikes\ElectricBike.cs" />
     <Compile Include="BLL\HashHelper.cs" />
-    <Compile Include="BLL\Order.cs" />
-    <Compile Include="BLL\OrderService.cs" />
+    <Compile Include="BLL\Orders\Order.cs" />
+    <Compile Include="BLL\Orders\OrderService.cs" />
     <Compile Include="BLL\SessionHelper.cs" />
     <Compile Include="DBL\DBAccounts.cs" />
     <Compile Include="DBL\DBOrders.cs" />
@@ -243,13 +244,14 @@
     <Compile Include="BLL\Interfaces\IBike.cs" />
     <Compile Include="BLL\Inventory.cs" />
     <Compile Include="BLL\Item.cs" />
-    <Compile Include="BLL\MountainBike.cs" />
+    <Compile Include="BLL\Bikes\MountainBike.cs" />
     <Compile Include="DBL\ConStr.cs" />
     <Compile Include="DBL\DBBikes.cs" />
     <Compile Include="DBL\Interfaces\IBikeRepository.cs" />
+    <Compile Include="DBL\Interfaces\IConStr.cs" />
     <Compile Include="DBL\Interfaces\IOrderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BLL\TouringBike.cs" />
+    <Compile Include="BLL\Bikes\TouringBike.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

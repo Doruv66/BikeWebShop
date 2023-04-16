@@ -17,7 +17,7 @@ namespace BikeLibrary.BLL.Interfaces
         List<Bike> GetBikesForHome();
         List<Bike> GetBikesForPage(int page);
         List<Bike> GetBikesBySearch(int[] types, string search);
-        List<BikeType> GetBikeTypes();
+        List<BikeType> GetBikesType();
 
     }
 }

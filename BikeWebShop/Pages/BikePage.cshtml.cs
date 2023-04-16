@@ -1,20 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BikeClassLibrary;
+using BikeLibrary.BLL.Interfaces;
 
 namespace BikeWebShop.Pages
 {
     public class BikePageModel : PageModel
     {
-        public Inventory inventory { get; set; }
+        public IInventory inventory { get; set; }
 
         public Bike bike { get; set; }
 
         public string Description { get; set; }
 
+        public BikePageModel(IInventory _inventory)
+        {
+            inventory = _inventory;
+        }
+
         public void OnGet(int id)
         {
-            inventory = new Inventory();
             bike = inventory.GetBike(id);
             Description = setDescription();
         }

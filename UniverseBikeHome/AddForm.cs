@@ -51,7 +51,7 @@ namespace UniverseBikeHome
 			{
 					if (cbKind.SelectedIndex == 0)
 					{
-						HomePage.shopInventory.AddBike(new MountainBike(txtBrand.Text,
+						HomePage.shopInventory.AddBike(new MountainBike(1, txtBrand.Text,
 							Convert.ToDouble(txtPrice.Text),
 							Convert.ToInt32(txtStock.Text),
 							ConvertImageToBytes(pbNewBike.Image),
@@ -60,7 +60,7 @@ namespace UniverseBikeHome
 					}
 					if (cbKind.SelectedIndex == 1)
 					{
-						HomePage.shopInventory.AddBike(new ElectricBike(txtBrand.Text,
+						HomePage.shopInventory.AddBike(new ElectricBike(1, txtBrand.Text,
 							Convert.ToDouble(txtPrice.Text),
 							Convert.ToInt32(txtStock.Text),
 							ConvertImageToBytes(pbNewBike.Image),
@@ -69,7 +69,7 @@ namespace UniverseBikeHome
 					}
 					if (cbKind.SelectedIndex == 2)
 					{
-						HomePage.shopInventory.AddBike(new CityBike(txtBrand.Text,
+						HomePage.shopInventory.AddBike(new CityBike(1, txtBrand.Text,
 							Convert.ToDouble(txtPrice.Text),
 							Convert.ToInt32(txtStock.Text),
 							ConvertImageToBytes(pbNewBike.Image),
@@ -78,7 +78,7 @@ namespace UniverseBikeHome
 					}
 					if (cbKind.SelectedIndex == 3)
 					{
-						HomePage.shopInventory.AddBike(new TouringBike(txtBrand.Text,
+						HomePage.shopInventory.AddBike(new TouringBike(1, txtBrand.Text,
 							Convert.ToDouble(txtPrice.Text),
 							Convert.ToInt32(txtStock.Text),
 							ConvertImageToBytes(pbNewBike.Image),
@@ -86,12 +86,17 @@ namespace UniverseBikeHome
 							Convert.ToInt32(txtBags.Text)));
 					}
 					ClearText();
-			
-			}
+
+            }
 			catch(Exception ex)
 			{
 				MessageBox.Show(ex.Message);
 			}
+			finally
+			{
+                HomePage home = (HomePage)this.ParentForm;
+                home.FillWithbikes(HomePage.nrOfPage);
+            }
 		}
 
 		public bool GetLights()

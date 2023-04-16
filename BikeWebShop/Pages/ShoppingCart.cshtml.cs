@@ -1,5 +1,6 @@
 using BikeClassLibrary;
 using BikeLibrary.BLL;
+using BikeLibrary.BLL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,14 +16,17 @@ namespace BikeWebShop.Pages
 
         public double Total { get; set; }
 
-        public Inventory inventory;
+        public IInventory inventory;
 
+        public ShoppingCartModel(IInventory _inventory)
+        {
+            inventory = _inventory;
+        }
 
         public void OnGet()
         {
             cart = new Cart();
             cart.SetItems(SessionHelper.GetObjectFromJson(HttpContext.Session, "cart"));
-            inventory = new Inventory();
         }
 
         public IActionResult OnGetAddToCart(int id)

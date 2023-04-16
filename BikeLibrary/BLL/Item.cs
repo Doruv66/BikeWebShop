@@ -13,11 +13,6 @@ namespace BikeLibrary.BLL
 
         public int quantity { get; set; }
 
-        public Item()
-        {
-
-        }
-
         public Item(int bikeid, int quantity)
         {
             this.bikeid = bikeid;

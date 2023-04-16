@@ -5,6 +5,7 @@ using BikeLibrary.BLL;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+using BikeLibrary.BLL.Interfaces;
 
 namespace BikeWebShop.Pages
 {
@@ -13,10 +14,15 @@ namespace BikeWebShop.Pages
         [BindProperty]
         public Login login { get; set; }
 
-        private CycleService service;
+        private IAccountService service;
 
         [TempData]
         public string ErrorMessage { get; set; }
+
+        public LoginModel(IAccountService _service)
+        {
+            service = _service;
+        }
 
         public void OnGet()
         {
@@ -26,7 +32,6 @@ namespace BikeWebShop.Pages
         {
             if(ModelState.IsValid)
             {
-                service = new CycleService();
                 Account acc = service.GetAccountByEmail(login.Email);
                 if(acc != null)
                 {
