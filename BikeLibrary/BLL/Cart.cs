@@ -1,8 +1,7 @@
-﻿using BikeClassLibrary;
+﻿using BikeLibrary.BLL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,9 +23,9 @@ namespace BikeLibrary.BLL
 
         public void SetItems(List<Item> _items)
         {
-            if(_items== null)
+            if (_items == null)
             {
-                return ;
+                return;
             }
             items = _items;
         }
@@ -34,7 +33,7 @@ namespace BikeLibrary.BLL
         public void Add(int bikeid)
         {
             int index = Exists(bikeid);
-            if(index == -1)
+            if (index == -1)
             {
                 items.Add(new Item(bikeid, 1));
             }
@@ -50,9 +49,9 @@ namespace BikeLibrary.BLL
             items.RemoveAt(index);
         }
 
-        public double GetTotalPrice()
+        public double GetTotalPrice(IInventory inventory)
         {
-            return 0;
+            return Convert.ToDouble(items.Sum(i => inventory.GetBike(i.bikeid).GetPrice()));
         }
 
         public void Clear()
@@ -62,7 +61,7 @@ namespace BikeLibrary.BLL
 
         public int Exists(int bikeid)
         {
-            for(int i = 0; i < items.Count; i++)
+            for (int i = 0; i < items.Count; i++)
             {
                 if (items[i].bikeid == bikeid)
                 {
@@ -72,4 +71,5 @@ namespace BikeLibrary.BLL
             return -1;
         }
     }
+
 }

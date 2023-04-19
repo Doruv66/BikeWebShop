@@ -52,7 +52,7 @@
                             <button type="button" class="btn btn-dark btn-block btn-lg">
                                 <a class="text-decoration-none text-white" asp-area="" asp-page="/Checkout">Proceed to Pay</a>
                             </button>
-                            <h4>Total Price: @Model.cart.GetTotalPrice().ToString("C") &euro;</h4>
+                            <h4>Total Price: @Model.cart.GetTotalPrice(Model.inventory).ToString("C") &euro;</h4>
                         </div>
                     </div>
                 }

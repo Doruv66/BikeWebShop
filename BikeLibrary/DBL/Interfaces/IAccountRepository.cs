@@ -12,5 +12,14 @@ namespace BikeLibrary.BLL
 
         List<Account> GetAll();
 
+        Account GetAccountById(int id);
+
+
+        Account GetAccountByEmail(string email);
+
+
+        void SetShippingInformation(Account acc);
+
+        Account GetShippingInformation(Account acc);
     }
 }

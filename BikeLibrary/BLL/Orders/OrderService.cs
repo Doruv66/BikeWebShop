@@ -1,4 +1,5 @@
 ﻿using BikeClassLibrary.DBL;
+using BikeLibrary.BLL.Interfaces;
 using BikeLibrary.DBL;
 using System;
 using System.Collections.Generic;
@@ -8,36 +9,33 @@ using System.Threading.Tasks;
 
 namespace BikeLibrary.BLL
 {
-    public class OrderService 
+    public class OrderService : IOrderService
     {
         private List<Order> orders;
-        DBOrders dbOrders;
-        ConStr con;
+        IOrderRepository dbOrders;
 
-        public OrderService() 
+        public OrderService(IOrderRepository dbOrders) 
         {
-            con= new ConStr();
-            dbOrders = new DBOrders(con.GetConnectionString());
+            this.dbOrders = dbOrders;
             orders = dbOrders.GetAll();
         }
 
         public List<Order> GetOrders() { return orders; }
 
         public Order GetOrder(int id)
-        { 
+        {
+            orders = dbOrders.GetAll();
             return (Order)orders.Where(o => o.GetId() == id);
         }
 
         public void AddOrder(Order order)
         {
             dbOrders.AddOrder(order);
-            SetOrders();
         }
 
         public void UpdateStatus(Order order)
         {
             dbOrders.UpdateStatus(order);
-            SetOrders();
         }
 
         public void SetOrders()
@@ -47,6 +45,7 @@ namespace BikeLibrary.BLL
 
         public List<Order> GetOrdersByStatus(string status)
         {
+            orders = dbOrders.GetAll();
             return orders.Where(o => o.GetStatus() == status).ToList();
 
         }

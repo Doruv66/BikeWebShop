@@ -1,5 +1,7 @@
 ﻿using BikeClassLibrary;
 using BikeLibrary.BLL;
+using BikeLibrary.BLL.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,25 +16,36 @@ namespace UniverseBikeHome
 {
     public partial class OrderUserControl : UserControl
     {
+        private readonly IAccountService service;
         private Order order;
+        private readonly IOrderService orderService;
+
         public OrderUserControl(Order order)
         {
             InitializeComponent();
+            this.service = Program.ServiceProvider.GetRequiredService<IAccountService>(); 
+            this.orderService = Program.ServiceProvider.GetRequiredService<IOrderService>();
+
+
+
             this.order = order;
+            
             SetUp();
         }
 
         public void SetUp()
         {
+            Account acc = service.GetAccountByid(order.GetAccid());
+            acc = service.GetShippingInformation(acc);
             if(order.GetStatus() == "shipped")
             {
                 btnComplete.Hide();
             }
             lblOrder.Text = order.GetId().ToString();
-            lblAddrress.Text = order.GetAddrress();
-            lblPostal.Text = order.GetPostalCode();
-            lblName.Text = order.GetFirstName();
-            lblLastName.Text = order.GetLastName();
+            lblAddrress.Text = acc.GetShippingInfo().Address;
+            lblPostal.Text = acc.GetShippingInfo().PostalCode;
+            lblName.Text = acc.GetShippingInfo().Name;
+            lblLastName.Text = acc.GetShippingInfo().LastName;
             lblStatus.Text = order.GetStatus();
             lblItems.Text = "";
             foreach(var item in order.GetItems())
@@ -51,9 +64,7 @@ namespace UniverseBikeHome
                 HomePage.shopInventory.UpdateBike(bike.GetId(), bike.GetPrice(), bike.GetStock(), bike.GetImageData());
             }
             order.ChangeStatus("shipped");
-            //change the status in the data base for the following order 
-            OrderService service = new OrderService();
-            service.UpdateStatus(order);
+            orderService.UpdateStatus(order);
 			Orders home = (Orders)this.ParentForm;
 			home.FillOrders();
 		}

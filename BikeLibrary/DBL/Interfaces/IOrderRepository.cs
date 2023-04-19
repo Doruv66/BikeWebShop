@@ -14,5 +14,7 @@ namespace BikeLibrary.DBL
         Order GetOrder(int id);
 
         bool AddOrder(Order order);
+
+        void UpdateStatus(Order order);
     }
 }

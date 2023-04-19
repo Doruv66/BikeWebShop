@@ -27,6 +27,8 @@ builder.Services.AddSession(options =>
 var connString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddTransient<IAccountRepository>(s => new DBAccounts(connString));
 builder.Services.AddTransient<IBikeRepository>(s => new DBBikes(connString));
+builder.Services.AddTransient<IOrderRepository>(s => new DBOrders(connString));
+builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<IInventory, Inventory>();
 builder.Services.AddTransient<IAccountService, AccountService>();
 

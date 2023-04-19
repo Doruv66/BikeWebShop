@@ -1,4 +1,6 @@
 ﻿using BikeLibrary.BLL;
+using BikeLibrary.BLL.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,11 +15,11 @@ namespace UniverseBikeHome
 {
     public partial class Orders : Form
     {
-        public OrderService orderService;
+        public IOrderService orderService;
         public Orders()
         {
             InitializeComponent();
-            orderService = new OrderService();
+            orderService = Program.ServiceProvider.GetRequiredService<IOrderService>();
             cbStatus.SelectedIndex = 0;
             FillOrders();
         }

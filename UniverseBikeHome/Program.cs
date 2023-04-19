@@ -39,6 +39,8 @@ namespace UniverseBikeHome
                     var connString = "Data Source=mssqlstud.fhict.local; Initial Catalog=dbi507644_managestu;User ID=dbi507644_managestu;Password=Otilia_1995";
                     services.AddTransient<IAccountRepository>(s => new DBAccounts(connString));
                     services.AddTransient<IBikeRepository>(s => new DBBikes(connString));
+                    services.AddTransient<IOrderRepository>(s => new DBOrders(connString));
+                    services.AddTransient<IOrderService, OrderService>();
                     services.AddTransient<IAccountService, AccountService>();
                     services.AddTransient<IInventory, Inventory>();
                     services.AddTransient<Login>();
