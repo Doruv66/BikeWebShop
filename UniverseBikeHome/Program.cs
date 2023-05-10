@@ -11,6 +11,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BikeLibrary.DBL.Interfaces;
+using BikeLibrary.DBL.SQLRepository;
 
 namespace UniverseBikeHome
 {
@@ -40,9 +42,7 @@ namespace UniverseBikeHome
                     services.AddTransient<IAccountRepository>(s => new DBAccounts(connString));
                     services.AddTransient<IBikeRepository>(s => new DBBikes(connString));
                     services.AddTransient<IOrderRepository>(s => new DBOrders(connString));
-                    services.AddTransient<IOrderService, OrderService>();
-                    services.AddTransient<IAccountService, AccountService>();
-                    services.AddTransient<IInventory, Inventory>();
+                    services.AddTransient<IReturnRepository>(s => new DBReturns(connString));
                     services.AddTransient<Login>();
                 }); 
         }

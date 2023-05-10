@@ -14,14 +14,14 @@ namespace BikeWebShop.Pages
         [BindProperty]
         public Login login { get; set; }
 
-        private IAccountService service;
+        private AccountService service;
 
         [TempData]
-        public string ErrorMessage { get; set; }
+        public string errorMessage { get; set; }
 
-        public LoginModel(IAccountService _service)
+        public LoginModel(IAccountRepository accrep)
         {
-            service = _service;
+            service = new AccountService(accrep);
         }
 
         public void OnGet()
@@ -35,11 +35,11 @@ namespace BikeWebShop.Pages
                 Account acc = service.GetAccountByEmail(login.Email);
                 if(acc != null)
                 {
-                    if(HashHelper.VerifyPassword(login.Password, acc.salt, acc.password, 1000))
+                    if(HashHelper.VerifyPassword(login.Password, acc.GetSalt(), acc.GetPassword(), 8000))
                     {
                         List<Claim> claims = new List<Claim>();
-                        claims.Add(new Claim(ClaimTypes.Name, acc.email));
-                        claims.Add(new Claim("id", $"{acc.id}"));
+                        claims.Add(new Claim(ClaimTypes.Name, acc.GetEmail()));
+                        claims.Add(new Claim("id", $"{acc.GetId()}"));
 
                         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                         HttpContext.SignInAsync(new ClaimsPrincipal(claimsIdentity));
@@ -47,12 +47,12 @@ namespace BikeWebShop.Pages
                     }
                     else
                     {
-                        ErrorMessage = "Incorrect Passsword";
+                        errorMessage = "Incorrect Passsword";
                     }
                 }
                 else
                 {
-                    ErrorMessage = "Incorrect Login";
+                    errorMessage = "Incorrect Login";
                 }
 
             }

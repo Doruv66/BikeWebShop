@@ -27,19 +27,21 @@ namespace BikeLibrary.DBL
                 {
                     conn.Open();
 
-                    string insertOrder = "INSERT INTO Orders (Status, Accid) VALUES (@Status, @Accid); SELECT SCOPE_IDENTITY();";
+                    string insertOrder = "INSERT INTO Orders (Status, Accid, Shipping, Date) VALUES (@Status, @Accid, @Shipping, @Date); SELECT SCOPE_IDENTITY();";
                     SqlCommand cmd = new SqlCommand(insertOrder, conn);
                     cmd.Parameters.AddWithValue("@Status", order.GetStatus());
                     cmd.Parameters.AddWithValue("@Accid", order.GetAccid());
+                    cmd.Parameters.AddWithValue("@Shipping", order.GetShipping().GetId());
+                    cmd.Parameters.AddWithValue("@Date", order.GetOrderDate());
                     int orderid = Convert.ToInt32(cmd.ExecuteScalar());
-
 
                     foreach(var item in order.GetItems())
                     {
-                        SqlCommand insertItems = new SqlCommand("Insert into OrderItems (OrderId, BikeId, Quantity) Values (@OrderId, @BikeId, @Quantity)", conn);
+                        SqlCommand insertItems = new SqlCommand("Insert into OrderItems (OrderId, BikeId, Quantity, status) Values (@OrderId, @BikeId, @Quantity, @status)", conn);
                         insertItems.Parameters.AddWithValue("@OrderId", orderid);
                         insertItems.Parameters.AddWithValue("@BikeId", item.bikeid);
                         insertItems.Parameters.AddWithValue("@Quantity", item.quantity);
+                        insertItems.Parameters.AddWithValue("@status", "ordered");
                         insertItems.ExecuteNonQuery();
                     }
                     return true;
@@ -55,7 +57,7 @@ namespace BikeLibrary.DBL
         public List<Order> GetAll()
         {
             List<Order> orders = new List<Order>();
-            string sql = "SELECT o.*, oi.BikeId, oi.Quantity FROM Orders o JOIN OrderItems oi ON o.Id = oi.OrderId";
+            string sql = "SELECT o.*, s.FirstName, s.Addrress, s.LastName, s.PostalCode, oi.BikeId, oi.Quantity, oi.status FROM Orders o left JOIN OrderItems oi ON o.Id = oi.OrderId left join ShippingInfo s on o.Shipping = s.id";
 
 			try
             {
@@ -68,18 +70,23 @@ namespace BikeLibrary.DBL
                     while (reader.Read())
                     {
                         int id = (int)reader["Id"];
+                        DateTime date = (DateTime)reader["Date"];
                         string status = (string)reader["Status"];
                         int accid = (int)reader["Accid"];
                         int bikeId = (int)reader["BikeId"];
                         int quantity = (int)reader["Quantity"];
-                        // Check if we've already processed this order
+                        string itemstatus = (string)reader["status"];
+                        string FirstName = (string)reader["FirstName"];
+                        string LastName = (string)reader["LastName"];
+                        string Addrress = (string)reader["Addrress"];
+                        string PostalCode = (string)reader["PostalCode"];
                         Order order = orders.FirstOrDefault(o => o.GetId() == id);
                         if (order == null)
                         {
-                            order = new Order(id, status, accid, new List<Item>());
+                            order = new Order(id, status, accid, new List<Item>(), date, new ShippingInfo(FirstName, LastName, PostalCode, Addrress));
                             orders.Add(order);
                         }
-                        Item item = new Item(bikeId, quantity);
+                        Item item = new Item(bikeId, quantity, itemstatus);
                         order.AddItem(item);
                     }
                 }
@@ -95,7 +102,7 @@ namespace BikeLibrary.DBL
 		public Order GetOrder(int id)
 		{
             Order order;
-            string sql = "SELECT o.*, oi.BikeId, oi.Quantity FROM Orders o JOIN OrderItems oi ON o.Id = oi.OrderId where o.Id = @id";
+            string sql = "SELECT o.*, s.FirstName, s.Addrress, s.LastName, s.PostalCode, oi.BikeId, oi.Quantity, oi.status FROM Orders o left JOIN OrderItems oi ON o.Id = oi.OrderId left join ShippingInfo s on o.Shipping = s.id where o.Id = @id";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
@@ -108,15 +115,21 @@ namespace BikeLibrary.DBL
                     while (reader.Read())
                     {
                         string status = (string)reader["Status"];
+                        DateTime date = (DateTime)reader["Date"];
                         int accid = (int)reader["Accid"];
                         int bikeId = (int)reader["BikeId"];
                         int quantity = (int)reader["Quantity"];
-                        order = new Order(id, status, accid, new List<Item>());
-                        Item item = new Item(bikeId, quantity);
+                        string itemstatus = (string)reader["status"];
+                        string FirstName = (string)reader["FirstName"];
+                        string LastName = (string)reader["LastName"];
+                        string Addrress = (string)reader["Addrress"];
+                        string PostalCode = (string)reader["PostalCode"];
+                        order = new Order(id, status, accid, new List<Item>(), date, new ShippingInfo(FirstName, LastName, PostalCode,Addrress));
+                        Item item = new Item(bikeId, quantity, itemstatus);
                         order.AddItem(item);
                         return order;
                     }
-                    
+
                 }
             }
             catch(Exception ex)
@@ -126,27 +139,115 @@ namespace BikeLibrary.DBL
             return null;
 		}
 
-		public void UpdateStatus(Order order)
+		public void UpdateStatus(int id, string status)
 		{
             try
             {
                 using(SqlConnection conn = new SqlConnection(connStr))
                 {
 
-                    string sql = "UPDATE Orders Set Status =@Status where id=@id";
+                    string sql = "UPDATE Orders Set Status = @Status where id = @id";
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("Status", order.GetStatus());
-					cmd.Parameters.AddWithValue("id", order.GetId());
-
+                    cmd.Parameters.AddWithValue("Status", status);
+					cmd.Parameters.AddWithValue("id", id);
                     conn.Open();
                     cmd.ExecuteNonQuery();
 				}
             }
             catch (Exception ex)
             {
-                //check in browser if it works
                 Console.WriteLine(ex.Message);
             }
 		}
-	}
+
+        public List<Order> GetUserOrders(int accid)
+        {
+            List<Order> orders = new List<Order>();
+            string sql = "SELECT o.*, s.FirstName, s.Addrress, s.LastName, s.PostalCode, oi.BikeId, oi.Quantity, oi.status FROM Orders o left JOIN OrderItems oi ON o.Id = oi.OrderId left join ShippingInfo s on o.Shipping = s.id where o.Accid = @accid Order By o.Date desc";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@accid", accid);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        int id = (int)reader["Id"];
+                        string status = (string)reader["Status"];
+                        DateTime date = (DateTime)reader["Date"];
+                        int bikeId = (int)reader["BikeId"];
+                        int quantity = (int)reader["Quantity"];
+                        string itemstatus = (string)reader["status"];
+                        string FirstName = (string)reader["FirstName"];
+                        string LastName = (string)reader["LastName"];
+                        string Addrress = (string)reader["Addrress"];
+                        string PostalCode = (string)reader["PostalCode"];
+                        Order order = orders.FirstOrDefault(o => o.GetId() == id);
+                        if (order == null)
+                        {
+                            order = new Order(id, status, accid, new List<Item>(), date, new ShippingInfo(FirstName, LastName, PostalCode, Addrress));
+                            orders.Add(order);
+                        }
+                        Item item = new Item(bikeId, quantity, itemstatus);
+                        order.AddItem(item);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return orders;
+        }
+
+        public List<Order> GetOrdersByStatus(string status)
+        {
+            List<Order> orders = new List<Order>();
+            string sql = "SELECT o.*, s.FirstName, s.Addrress, s.LastName, s.PostalCode, oi.BikeId, oi.Quantity, oi.status FROM Orders o left JOIN OrderItems oi ON o.Id = oi.OrderId left join ShippingInfo s on o.Shipping = s.id where o.status = @status";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@status", status);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        int id = (int)reader["Id"];
+                        DateTime date = (DateTime)reader["Date"];
+                        int bikeId = (int)reader["BikeId"];
+                        int quantity = (int)reader["Quantity"];
+                        string itemstatus = (string)reader["status"];
+                        int accid = (int)reader["Accid"];
+                        string FirstName = (string)reader["FirstName"];
+                        string LastName = (string)reader["LastName"];
+                        string Addrress = (string)reader["Addrress"];
+                        string PostalCode = (string)reader["PostalCode"];
+                        Order order = orders.FirstOrDefault(o => o.GetId() == id);
+                        if (order == null)
+                        {
+                            order = new Order(id, status, accid, new List<Item>(), date, new ShippingInfo(FirstName, LastName, PostalCode, Addrress));
+                            orders.Add(order);
+                        }
+                        Item item = new Item(bikeId, quantity, itemstatus);
+                        order.AddItem(item);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return orders;
+        }
+    }
 }

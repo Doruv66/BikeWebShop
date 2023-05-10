@@ -1,6 +1,7 @@
 using BikeClassLibrary;
 using BikeLibrary.BLL;
 using BikeLibrary.BLL.Interfaces;
+using BikeLibrary.DBL;
 using BikeWebShop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,42 +13,64 @@ namespace BikeWebShop.Pages
     {
         public double Total { get; set; }
 
-        public IInventory Inventory { get; set; }
-        public IAccountService Service { get; }
-        public IOrderService Orders { get; }
+        public Inventory Inventory { get; set; }
+        public AccountService Service { get; }
+        public Account acc { get; set; }
+        public OrderService Orders { get; }
         [BindProperty]
         public ShippingForm shipping { get; set; }
 
-        public CheckoutModel(IInventory _inventory, IAccountService _service, IOrderService _order)
+        public CheckoutModel(IBikeRepository bikerep, IAccountRepository accrep, IOrderRepository orderrep)
         {
-            Inventory = _inventory;
-            Service = _service;
-            Orders = _order;
+            Inventory = new Inventory(bikerep);
+            Service = new AccountService(accrep);
+            Orders = new OrderService(orderrep);
         }
 
         public void OnGet()
         {
-            Cart cart = new Cart();
-            cart.SetItems(SessionHelper.GetObjectFromJson(HttpContext.Session, "cart"));
+            int accid = Convert.ToInt32(User.FindFirst("id").Value);
+            acc = Service.GetAccountByid(accid);
+            acc = Service.GetShippingInformation(acc);
+            Cart cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
             Total = cart.GetTotalPrice(Inventory);
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPostChangeInfo()
         {
             int accid = Convert.ToInt32(User.FindFirst("id").Value);
-            Cart cart = new Cart();
-            cart.SetItems(SessionHelper.GetObjectFromJson(HttpContext.Session, "cart"));
+            acc = Service.GetAccountByid(accid);
+            acc.SetShippingInfo(null);
+            Cart cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
+            Total = cart.GetTotalPrice(Inventory);
+            return Page();
+        }
+
+        public IActionResult OnPostCheckout()
+        {
+            int accid = Convert.ToInt32(User.FindFirst("id").Value);
+            acc = Service.GetAccountByid(accid);
+            acc = Service.GetShippingInformation(acc);
+            Cart cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
             if (ModelState.IsValid)
             {
-                Account acc = Service.GetAccountByid(accid);
-                acc.SetShippingInfo(new ShippingInfo(shipping.Name, shipping.LastName, shipping.PostalCode, shipping.Address));
-                Service.SetShippingInformation(acc);
-                Orders.AddOrder(new Order(1, "placed", accid, cart.Getitems()));
-                cart.Clear();
-				SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart.Getitems());
-                return RedirectToPage("Index");
+                    acc.SetShippingInfo(new ShippingInfo(shipping.Name, shipping.LastName, shipping.PostalCode, shipping.Address));
+                    Service.SetShippingInformation(acc);
+                    acc = Service.GetShippingInformation(acc);
+                    Orders.AddOrder(new Order(1, "placed", accid, cart.Getitems(), DateTime.Now, acc.GetShippingInfo()), Inventory);
+                    cart.Clear();
+                    SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+                    return RedirectToPage("Orders");
+            }
+            if (acc.GetShippingInfo() != null)
+            {
+                    Orders.AddOrder(new Order(1, "placed", accid, cart.Getitems(), DateTime.Now, acc.GetShippingInfo()), Inventory);
+                    cart.Clear();
+                    SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+                    return RedirectToPage("Orders");
             }
             return Page();
         }
+            
     }
 }

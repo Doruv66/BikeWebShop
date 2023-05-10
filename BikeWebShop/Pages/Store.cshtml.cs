@@ -1,5 +1,6 @@
 using BikeClassLibrary;
 using BikeLibrary.BLL.Interfaces;
+using BikeLibrary.DBL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,7 +8,7 @@ namespace BikeWebShop.Pages
 {
     public class StoreModel : PageModel
     {
-        public IInventory inventory { get; set; }
+        public Inventory inventory { get; set; }
 
         public List<Bike> Catalog { get; set; }
 
@@ -17,9 +18,9 @@ namespace BikeWebShop.Pages
         [BindProperty(SupportsGet = true)]
         public int[] Types { get; set; }
 
-        public StoreModel(IInventory _inventory)
+        public StoreModel(IBikeRepository bikerep)
         {
-            inventory = _inventory;
+            inventory = new Inventory(bikerep);
         }
         public void OnGet()
         {

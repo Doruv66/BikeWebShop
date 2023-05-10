@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeLibrary", "..\BikeLibra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeWebShop", "..\BikeWebShop\BikeWebShop.csproj", "{C616EDED-8837-491F-94FF-AD9835BA4BF7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestsBikeUniverse", "..\TestsBikeUniverse\TestsBikeUniverse.csproj", "{DB3E9494-6A95-4BDE-A55E-CF922752DA44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C616EDED-8837-491F-94FF-AD9835BA4BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C616EDED-8837-491F-94FF-AD9835BA4BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C616EDED-8837-491F-94FF-AD9835BA4BF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB3E9494-6A95-4BDE-A55E-CF922752DA44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB3E9494-6A95-4BDE-A55E-CF922752DA44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB3E9494-6A95-4BDE-A55E-CF922752DA44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB3E9494-6A95-4BDE-A55E-CF922752DA44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

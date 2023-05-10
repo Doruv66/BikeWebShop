@@ -1,4 +1,6 @@
-﻿using BikeLibrary.DBL;
+﻿using BikeClassLibrary;
+using BikeLibrary.BLL.Interfaces;
+using BikeLibrary.DBL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,19 +19,37 @@ namespace BikeLibrary.BLL
 
         private List<Item> items;
 
-        public Order(int id, string status, int accid, List<Item> items)
+        private DateTime date;
+
+        private ShippingInfo shipping;
+
+        public Order(int id, string status, int accid, List<Item> items, DateTime date)
         {
             Id = id;
             this.status = status;
             this.accid = accid;
-            this.items = items; 
+            this.items = items;
+            this.date = date;
         }
 
+        public Order(int id, string status, int accid, List<Item> items, DateTime date, ShippingInfo shipping) : this(id, status, accid, items, date)
+        {
+            this.shipping = shipping;
+        }
+
+        public ShippingInfo GetShipping()
+        {
+            return shipping;
+        }
         public int GetId()
         {
             return Id;
         }
 
+        public DateTime GetOrderDate()
+        {
+            return date;
+        }
 
         public string GetStatus()
         {
@@ -54,6 +74,11 @@ namespace BikeLibrary.BLL
         public void ChangeStatus(string newstatus)
         {
             status = newstatus;
+        }
+
+        public double GetTotalPrice(Inventory inventory)
+        {
+            return Convert.ToDouble(items.Sum(i => inventory.GetBike(i.bikeid).GetPrice()));
         }
     }
 }

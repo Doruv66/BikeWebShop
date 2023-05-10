@@ -2,16 +2,17 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BikeClassLibrary;
 using BikeLibrary.BLL.Interfaces;
+using BikeLibrary.DBL;
 
 namespace BikeWebShop.Pages
 {
 	public class IndexModel : PageModel
 	{
-		public IInventory inventory { get; set; }
+		public Inventory inventory { get; set; }
 
-		public IndexModel(IInventory _inventory)
+		public IndexModel(IBikeRepository bikerep)
 		{
-			inventory = _inventory;
+			inventory = new Inventory(bikerep);
 		}
 
 		public void OnGet()

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "OZsy73riEIHY2beZ3L4A2HxJLRtN5UHCwt6uswgFn1E=",
+  "Hash": "VTCWoSw+dcq57vHPUiWC0BWow4mHQP4RBnBBnWs+SUo=",
   "Source": "BikeWebShop",
   "BasePath": "_content/BikeWebShop",
   "Mode": "Default",
@@ -83,6 +83,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "\\\\Mac\\Home\\Desktop\\individual Assigment Semester 2\\BikeWebShop\\wwwroot\\Documents\\.DS_Store",
+      "SourceId": "BikeWebShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "\\\\Mac\\Home\\Desktop\\individual Assigment Semester 2\\BikeWebShop\\wwwroot\\",
+      "BasePath": "_content/BikeWebShop",
+      "RelativePath": "Documents/.DS_Store",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Documents\\.DS_Store"
+    },
+    {
+      "Identity": "\\\\Mac\\Home\\Desktop\\individual Assigment Semester 2\\BikeWebShop\\wwwroot\\Documents\\returnlabel.pdf",
+      "SourceId": "BikeWebShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "\\\\Mac\\Home\\Desktop\\individual Assigment Semester 2\\BikeWebShop\\wwwroot\\",
+      "BasePath": "_content/BikeWebShop",
+      "RelativePath": "Documents/returnlabel.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Documents\\returnlabel.pdf"
     },
     {
       "Identity": "\\\\Mac\\Home\\Desktop\\individual Assigment Semester 2\\BikeWebShop\\wwwroot\\favicon.ico",

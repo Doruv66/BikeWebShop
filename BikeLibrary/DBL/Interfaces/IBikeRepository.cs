@@ -20,5 +20,9 @@ namespace BikeLibrary.DBL
         bool AddNewBike(Bike bike);
 
         List<Bike> GetLastBikes();
+
+        List<Bike> GetBikesForPage(int page);
+
+        List<Bike> GetBikesBySearch(int[] types, string search);
     }
 }

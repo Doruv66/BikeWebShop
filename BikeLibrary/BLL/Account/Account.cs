@@ -8,15 +8,15 @@ namespace BikeLibrary.BLL
 {
     public class Account
     {
-        public int id { get; private set; }
+        private int id;
 
-        public byte[] password { get; private set; }
+        private byte[] password;
 
-        public byte[] salt { get; private set; }
+        private byte[] salt;
 
-        public string email { get; private set; }
+        private string email;
 
-        private ShippingInfo shipping { get; set; } 
+        private ShippingInfo shipping;
 
 
         public Account(int id, byte[] password, byte[] salt, string email)
@@ -38,6 +38,24 @@ namespace BikeLibrary.BLL
             return shipping;
         }
 
+        public int GetId()
+        {
+            return id;
+        }
         
+        public byte[] GetPassword()
+        {
+            return password;
+        }
+
+        public byte[] GetSalt()
+        {
+            return salt;
+        }
+
+        public string GetEmail()
+        {
+            return email;
+        }
     }
 }

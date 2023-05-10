@@ -91,3 +91,5 @@
 \\Mac\Home\Desktop\individual Assigment Semester 2\UniverseBikeHome\bin\Debug\Microsoft.Extensions.Options.xml
 \\Mac\Home\Desktop\individual Assigment Semester 2\UniverseBikeHome\bin\Debug\Microsoft.Extensions.Options.ConfigurationExtensions.xml
 \\Mac\Home\Desktop\individual Assigment Semester 2\UniverseBikeHome\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+\\Mac\Home\Desktop\individual Assigment Semester 2\UniverseBikeHome\obj\Debug\UniverseBikeHome.Returns.resources
+\\Mac\Home\Desktop\individual Assigment Semester 2\UniverseBikeHome\obj\Debug\UniverseBikeHome.ReturnUserControl.resources

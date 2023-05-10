@@ -226,6 +226,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Returns.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Returns.Designer.cs">
+      <DependentUpon>Returns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReturnUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ReturnUserControl.Designer.cs">
+      <DependentUpon>ReturnUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UpdateBikeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -260,6 +272,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Returns.resx">
+      <DependentUpon>Returns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReturnUserControl.resx">
+      <DependentUpon>ReturnUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UpdateBikeForm.resx">
       <DependentUpon>UpdateBikeForm.cs</DependentUpon>
     </EmbeddedResource>

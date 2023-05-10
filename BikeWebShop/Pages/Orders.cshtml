@@ -1,0 +1,104 @@
+﻿@page
+@model BikeWebShop.Pages.OrdersModel
+@{
+}
+
+
+<section class="h-100" style="background-color: #eee;">
+    <div class="container h-100 py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-10">
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="fw-normal mb-0 text-black">Returns and Orders:</h3>
+                </div>
+                @if (Model.orders.Count > 0)
+                {
+                    @foreach (var order in Model.orders)
+                    {
+                        <form method="post" asp-page="cart" asp-page-handler="update">
+                            <p>Order:</p>
+                            <div class="card rounded-3 mb-4">
+                                <div class="card-body p-4">
+                                    <div class="row d-flex justify-content-between align-items-center">
+                                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                            <p>Status:</p>
+                                            <p>@order.GetStatus()</p>
+                                        </div>
+                                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                            <p>Shipping Addrres</p>
+                                            <p>Name: @order.GetShipping().GetName()</p>
+                                            <p>Last Name: @order.GetShipping().GetLastName()</p>
+                                            <p>Zip Code: @order.GetShipping().GetPostalCode()</p>
+                                            <p>Addrress: @order.GetShipping().GetAddrress()</p>
+                                        </div>
+                                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                            <p>Order Placed on:</p>
+                                            <p>@order.GetOrderDate().ToString("MMMM dd")</p>
+                                        </div>
+                                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                            <p>Total Price:</p>
+                                            <p>@order.GetTotalPrice(Model.inventory).ToString("C") </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @foreach (var item in order.GetItems())
+                            {
+                            <div class="card rounded-3 mb-4">
+                                <div class="card-body p-4">
+                                        <div class="row d-flex justify-content-between align-items-center">
+                                            <div class="col-md-3 col-lg-3 col-xl-3">
+                                                <img src="data:image;base64,@Convert.ToBase64String(Model.inventory.GetBike(item.bikeid).GetImageData())" class="img-fluid rounded-3" alt="@Model.inventory.GetBike(item.bikeid).GetBrand()" />
+                                            </div>
+                                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                                <p>@Model.inventory.GetBike(item.bikeid).GetBrand()</p>
+                                            </div>
+                                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                                <p>@Model.inventory.GetBike(item.bikeid).GetPrice()</p>
+                                            </div>
+                                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                                <p>quanity: @item.quantity</p>
+                                            </div>
+                                            @switch(@item.status)
+                                            {
+                                                case "ordered":
+                                                    @if(order.GetOrderDate().AddDays(15) > DateTime.Now)
+                                                    {
+                                                        <div class="col-md-3 col-lg-2 col-xl-2 text-center">
+                                                            <button class="btn btn-outline-dark flex-shrink-0 bg-dark text-white">
+                                                                <a asp-page="ReturnRequest" asp-route-id="@item.bikeid" asp-route-orderid="@order.GetId()" class="btn btn-dark">
+                                                                    Return
+                                                                </a>
+                                                            </button>
+                                                            <p> The return is valid until @order.GetOrderDate().AddDays(15).ToString("MMMM dd")</p>
+                                                        </div>
+                                                    }
+                                                    break;
+                                                case "requested":
+                                                    <div class="col-md-3 col-lg-2 col-xl-2 text-center">
+                                                        <p>Your return is waiting for approval</p>
+                                                    </div>
+                                                    break;
+                                                case "approved":
+                                                    <div class="col-md-3 col-lg-2 col-xl-2 text-center">
+                                                        <a href="/Documents/returnlabel.pdf" download>Click To downland the return label</a>
+                                                    </div>
+                                                    break;
+                                            }
+                                        </div>
+                                </div>
+                            </div>
+                            }
+                         </form>
+                    }
+                    
+                }
+                else
+                {
+                    <h1>No Orders Yet</h1>
+                }
+            </div>
+        </div>
+    </div>
+</section>

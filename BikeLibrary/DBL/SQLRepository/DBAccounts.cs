@@ -29,9 +29,9 @@ namespace BikeLibrary.DBL
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
                         conn.Open();
-                        cmd.Parameters.AddWithValue("password", account.password);
-                        cmd.Parameters.AddWithValue("salt", account.salt);
-                        cmd.Parameters.AddWithValue("email", account.email);
+                        cmd.Parameters.AddWithValue("password", account.GetPassword());
+                        cmd.Parameters.AddWithValue("salt", account.GetSalt());
+                        cmd.Parameters.AddWithValue("email", account.GetEmail());
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -115,11 +115,11 @@ namespace BikeLibrary.DBL
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
                         conn.Open();
-                        cmd.Parameters.AddWithValue("@AccId", acc.id);
-                        cmd.Parameters.AddWithValue("@FirstName", acc.GetShippingInfo().Name);
-                        cmd.Parameters.AddWithValue("@LastName", acc.GetShippingInfo().LastName);
-                        cmd.Parameters.AddWithValue("@Addrress", acc.GetShippingInfo().Address);
-                        cmd.Parameters.AddWithValue("@PostalCode", acc.GetShippingInfo().PostalCode);
+                        cmd.Parameters.AddWithValue("@AccId", acc.GetId());
+                        cmd.Parameters.AddWithValue("@FirstName", acc.GetShippingInfo().GetName());
+                        cmd.Parameters.AddWithValue("@LastName", acc.GetShippingInfo().GetLastName());
+                        cmd.Parameters.AddWithValue("@Addrress", acc.GetShippingInfo().GetAddrress());
+                        cmd.Parameters.AddWithValue("@PostalCode", acc.GetShippingInfo().GetPostalCode());
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -136,11 +136,11 @@ namespace BikeLibrary.DBL
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {
-                    string sql = "select * from ShippingInfo where AccId = @AccId";
+                    string sql = "select top 1 * from ShippingInfo where AccId = @AccId order by id desc";
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
 
-                        cmd.Parameters.AddWithValue("@AccId", acc.id);
+                        cmd.Parameters.AddWithValue("@AccId", acc.GetId());
                         conn.Open();
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
@@ -149,8 +149,9 @@ namespace BikeLibrary.DBL
                             string LastName = (string)reader["LastName"];
                             string Addrress = (string)reader["Addrress"];
                             string PostalCode = (string)reader["PostalCode"];
+                            int id = (int)reader["id"];
 
-                            acc.SetShippingInfo(new ShippingInfo(FirstName, LastName, PostalCode, Addrress));
+                            acc.SetShippingInfo(new ShippingInfo(id, FirstName, LastName, PostalCode, Addrress));
                             return acc;
                         }
                     }

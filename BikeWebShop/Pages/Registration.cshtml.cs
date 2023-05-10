@@ -12,11 +12,14 @@ namespace BikeWebShop.Pages
         [BindProperty]
         public Registration register { get; set; }
 
-        private IAccountService service;
+        private AccountService service;
 
-        public RegistrationModel(IAccountService _service)
+
+        public string ErrorMessage { get; set; }
+
+        public RegistrationModel(IAccountRepository accrep)
         {
-            service = _service;
+            service = new AccountService(accrep);
         }
 
         public void OnGet()
@@ -25,13 +28,20 @@ namespace BikeWebShop.Pages
 
         public IActionResult OnPost()
         {
-            if(ModelState.IsValid)
+            try
             {
-                byte[] salt = HashHelper.GenerateSalt();
-                byte[] hashedpassword = HashHelper.HashPassword(register.Password, salt, 1000);
-                Account acc = new Account(1, hashedpassword, salt, register.Email);
-                service.AddAccount(acc);
-                return RedirectToPage("Login");
+                if (ModelState.IsValid)
+                {
+                    byte[] salt = HashHelper.GenerateSalt();
+                    byte[] hashedpassword = HashHelper.HashPassword(register.Password, salt, 8000);
+                    Account acc = new Account(1, hashedpassword, salt, register.Email);
+                    service.AddAccount(acc);
+                    return RedirectToPage("Login");
+                }
+            }
+            catch(ArgumentException ex)
+            {
+                ErrorMessage = ex.Message;
             }
             return Page();
         }

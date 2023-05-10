@@ -36,6 +36,7 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
             this.btnOrders = new System.Windows.Forms.Button();
+            this.btnReturns = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -131,12 +132,26 @@
             this.btnOrders.UseVisualStyleBackColor = false;
             this.btnOrders.Click += new System.EventHandler(this.btnOrders_Click);
             // 
+            // btnReturns
+            // 
+            this.btnReturns.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(221)))), ((int)(((byte)(225)))));
+            this.btnReturns.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReturns.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReturns.Location = new System.Drawing.Point(443, 146);
+            this.btnReturns.Name = "btnReturns";
+            this.btnReturns.Size = new System.Drawing.Size(243, 109);
+            this.btnReturns.TabIndex = 8;
+            this.btnReturns.Text = "Returns";
+            this.btnReturns.UseVisualStyleBackColor = false;
+            this.btnReturns.Click += new System.EventHandler(this.btnReturns_Click);
+            // 
             // HomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1492, 1151);
+            this.Controls.Add(this.btnReturns);
             this.Controls.Add(this.btnOrders);
             this.Controls.Add(this.btnPrevious);
             this.Controls.Add(this.btnNext);
@@ -162,6 +177,7 @@
 		private System.Windows.Forms.Button btnNext;
 		private System.Windows.Forms.Button btnPrevious;
         private System.Windows.Forms.Button btnOrders;
+        private System.Windows.Forms.Button btnReturns;
     }
 }
 

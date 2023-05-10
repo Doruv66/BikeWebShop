@@ -11,20 +11,21 @@ using System.Windows.Forms;
 using BikeClassLibrary;
 using BikeClassLibrary.DBL;
 using BikeLibrary.BLL.Interfaces;
+using BikeLibrary.DBL;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace UniverseBikeHome
 {
 	public partial class HomePage : Form
 	{
-		public static IInventory shopInventory;
+		public static Inventory shopInventory;
 
 		public static int nrOfPage = 1;
 
 		public HomePage()
 		{
 			InitializeComponent();
-			shopInventory = Program.ServiceProvider.GetRequiredService<IInventory>();	
+			shopInventory = new Inventory(Program.ServiceProvider.GetRequiredService<IBikeRepository>());	
             FillWithbikes(nrOfPage);
 		}
 
@@ -48,7 +49,7 @@ namespace UniverseBikeHome
 					BikeContainer.Controls.Add(ucbike);
 				}
 			}
-			if (shopInventory.GetBikesForPage(nrOfPage + 1) == null)
+			if (shopInventory.GetBikesForPage(nrOfPage + 1).ToList().Count == 0)
 			{
 				btnNext.Hide();
 			}
@@ -85,6 +86,12 @@ namespace UniverseBikeHome
         private void btnOrders_Click(object sender, EventArgs e)
         {
 			Orders form = new Orders();
+			form.Show();
+        }
+
+        private void btnReturns_Click(object sender, EventArgs e)
+        {
+			Returns form = new Returns();
 			form.Show();
         }
     }

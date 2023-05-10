@@ -1,4 +1,5 @@
-﻿using BikeLibrary.BLL;
+﻿using BikeClassLibrary;
+using BikeLibrary.BLL;
 using BikeLibrary.BLL.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,11 @@ namespace UniverseBikeHome
 {
     public partial class Login : Form
     {
-        IAccountService service;
-        public Login(IAccountService _service)
+        AccountService service;
+        public Login(IAccountRepository accrep)
         {
             InitializeComponent();
-            service = _service;
+            service = new AccountService(accrep);
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -32,7 +33,7 @@ namespace UniverseBikeHome
             if(txtLogin.Text == "admin@bikeuniverse.com")
             {
                 Account acc = service.GetAccountByEmail(txtLogin.Text);
-                if(HashHelper.VerifyPassword(txtPassword.Text, acc.salt, acc.password, 1000))
+                if(HashHelper.VerifyPassword(txtPassword.Text, acc.GetSalt(), acc.GetPassword(), 8000))
                 {
                     HomePage home = new HomePage();
                     home.Show();

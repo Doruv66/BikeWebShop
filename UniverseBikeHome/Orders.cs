@@ -1,5 +1,6 @@
 ﻿using BikeLibrary.BLL;
 using BikeLibrary.BLL.Interfaces;
+using BikeLibrary.DBL;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,11 @@ namespace UniverseBikeHome
 {
     public partial class Orders : Form
     {
-        public IOrderService orderService;
+        public OrderService orderService;
         public Orders()
         {
             InitializeComponent();
-            orderService = Program.ServiceProvider.GetRequiredService<IOrderService>();
+            orderService = new OrderService(Program.ServiceProvider.GetRequiredService<IOrderRepository>());
             cbStatus.SelectedIndex = 0;
             FillOrders();
         }
@@ -30,10 +31,8 @@ namespace UniverseBikeHome
             OrderPanel.Controls.Clear();
             foreach (var order in orderService.GetOrdersByStatus((string)cbStatus.SelectedItem))
             {
-
                 ucorder = new OrderUserControl(order);
                 OrderPanel.Controls.Add(ucorder);
-                
             }
         }
 

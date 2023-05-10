@@ -10,33 +10,64 @@
                 <h5 class="mb-0 text-font text-uppercase">Delivery address</h5>
             </div>
             <div class="card-body">
-                    <div class="row mb-4">
-                        <div class="col">
-                            <div class="form-outline">
-                                <input asp-for="shipping.Name" class="form-control" />
-                                 <span asp-validation-for="shipping.Name"></span>
-                                <label class="form-label" asp-for="shipping.Name">First name</label>
-                            </div>
+                @if(Model.acc.GetShippingInfo() != null)
+                {
+                    <div class="container text-black">
+                        <div class="form-outline mb-4">
+                            <label class="form-label">Name:</label>
+                                <label class="form-label text-dark">@Model.acc.GetShippingInfo().GetName()</label>
                         </div>
-                        <div class="col">
-                            <div class="form-outline">
+                        <div class="form-outline mb-4">
+                            <label class="form-label">LastName:</label>
+                                <label class="form-label text-dark">@Model.acc.GetShippingInfo().GetLastName()</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                            <label class="form-label" >Addrress:</label>
+                                <label class="form-label text-dark">@Model.acc.GetShippingInfo().GetAddrress()</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                            <label class="form-label" >Postal code:</label>
+                                <label class="form-label text-dark">@Model.acc.GetShippingInfo().GetPostalCode()</label>
+                        </div>
+                            <button asp-page="Checkout" asp-page-handler="changeinfo" class="btn btn-dark btn-block btn-lg">
+                                <div class="d-flex justify-content-between text-white-50">
+                                    <span>Change Info</span>
+                                </div>
+                            </button>
+                    </div>
+
+                }
+                else
+                {
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div class="form-outline">
+                                    <input asp-for="shipping.Name" class="form-control" />
+                                    <span asp-validation-for="shipping.Name"></span>
+                                    <label class="form-label" asp-for="shipping.Name">First name</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-outline">
                                     <input asp-for="shipping.LastName" class="form-control" />
                                     <span asp-validation-for="shipping.LastName"></span>
                                     <label class="form-label" asp-for="shipping.LastName">Last name</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-outline mb-4">
+                        <div class="form-outline mb-4">
                             <input asp-for="shipping.Address" class="form-control" />
                             <span asp-validation-for="shipping.Address"></span>
                             <label class="form-label" asp-for="shipping.Address">Addrress</label>
-                    </div>
-                
-                    <div class="form-outline mb-4">
+                        </div>
+
+                        <div class="form-outline mb-4">
                             <input asp-for="shipping.PostalCode" class="form-control" />
                             <span asp-validation-for="shipping.PostalCode"></span>
                             <label class="form-label" asp-for="shipping.PostalCode">Postal code</label>
-                    </div>
+                        </div>
+                }
+                    
 
             
             </div>
@@ -81,12 +112,11 @@
                             <p class="mb-2">@Model.Total.ToString("C")</p>
                         </div>
 
-                        <button type="submit" class="btn btn-dark btn-block btn-lg" >
+                        <button type="submit" asp-page="Checkout" asp-page-handler="checkout" class="btn btn-dark btn-block btn-lg" >
                             <div class="d-flex justify-content-between text-white-50">
                                 <span>Checkout</span>
                             </div>
                         </button>
-
                     </div>
             
                 </div>

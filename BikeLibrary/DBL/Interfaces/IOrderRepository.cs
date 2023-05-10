@@ -15,6 +15,10 @@ namespace BikeLibrary.DBL
 
         bool AddOrder(Order order);
 
-        void UpdateStatus(Order order);
+        void UpdateStatus(int orderid, string newstatus);
+
+        List<Order> GetUserOrders(int accid);
+
+        List<Order> GetOrdersByStatus(string status);
     }
 }

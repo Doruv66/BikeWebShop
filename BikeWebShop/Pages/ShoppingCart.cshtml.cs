@@ -1,6 +1,7 @@
 using BikeClassLibrary;
 using BikeLibrary.BLL;
 using BikeLibrary.BLL.Interfaces;
+using BikeLibrary.DBL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,36 +15,31 @@ namespace BikeWebShop.Pages
     {
         public Cart cart { get; set; }   
 
-        public double Total { get; set; }
+        public Inventory inventory;
 
-        public IInventory inventory;
-
-        public ShoppingCartModel(IInventory _inventory)
+        public ShoppingCartModel(IBikeRepository bikerep)
         {
-            inventory = _inventory;
+            inventory = new Inventory(bikerep);
         }
 
         public void OnGet()
         {
-            cart = new Cart();
-            cart.SetItems(SessionHelper.GetObjectFromJson(HttpContext.Session, "cart"));
+            cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
         }
 
         public IActionResult OnGetAddToCart(int id)
         {
-            cart = new Cart();
-            cart.SetItems(SessionHelper.GetObjectFromJson(HttpContext.Session, "cart"));
+            cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
             cart.Add(id);
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart.Getitems());
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             return RedirectToPage("ShoppingCart");
         }
 
         public IActionResult OnGetDelete(int id)
         {
-            cart = new Cart();
-            cart.SetItems(SessionHelper.GetObjectFromJson(HttpContext.Session, "cart"));
+            cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
             cart.Remove(id);
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart.Getitems());
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             return RedirectToPage("ShoppingCart");
         }
     }

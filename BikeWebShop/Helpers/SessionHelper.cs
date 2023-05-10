@@ -1,26 +1,30 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
+using System.Text.Json;
+
 
 namespace BikeLibrary.BLL
 
 {
     public static class SessionHelper
     {
-        public static void SetObjectAsJson(ISession session, string key, object value)
+        public static void SetObjectAsJson(ISession session, string key, Cart cart)
         {
-            session.SetString(key, JsonSerializer.Serialize(value));
+            string cartJson = JsonSerializer.Serialize(cart);
+            session.SetString(key, cartJson);
         }
 
-        public static List<Item> GetObjectFromJson(ISession session, string key)
+        public static Cart GetObjectFromJson(ISession session, string key)
         {
             var value = session.GetString(key);
-            return value == null ? default(List<Item>) : JsonSerializer.Deserialize<List<Item>>(value);
-
+            if(value == null)
+            {
+                return new Cart();
+            }
+            return JsonSerializer.Deserialize<Cart>(value);
         }
-
     }
 }

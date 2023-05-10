@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using BikeClassLibrary;
 using System.Data.SqlClient;
 using BikeLibrary.DBL;
+using System.Drawing.Printing;
+using System.Windows.Forms;
 
 namespace BikeClassLibrary.DBL
 {
@@ -98,6 +100,7 @@ namespace BikeClassLibrary.DBL
 			}
 			catch (Exception ex)
 			{
+                Console.WriteLine(ex.Message);
 				return false;
 			}
 		}
@@ -125,6 +128,7 @@ namespace BikeClassLibrary.DBL
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }
@@ -183,6 +187,7 @@ namespace BikeClassLibrary.DBL
 			}
 			catch (Exception ex)
 			{
+                Console.WriteLine(ex.Message);
 				return null;
 			}
 		}
@@ -232,8 +237,9 @@ namespace BikeClassLibrary.DBL
                     return true;
                 }
             }
-            catch 
+            catch(Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }
@@ -289,6 +295,130 @@ namespace BikeClassLibrary.DBL
                             default:
                                 bike = new Bike(id, brand, price, stock, imageData, bikeType);
                                 bike.SetId(id);
+                                bikeList.Add(bike);
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return bikeList;
+        }
+
+        public List<Bike> GetBikesBySearch(int[] types, string search)
+        {
+            var bikeList = new List<Bike>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    string sql = "SELECT * FROM AllBikes LEFT JOIN CityBikes ON AllBikes.Id = CityBikes.Id LEFT JOIN ElectricBikes ON AllBikes.Id = ElectricBikes.Id LEFT JOIN TouringBikes ON AllBikes.Id = TouringBikes.Id LEFT JOIN MountainBikes ON AllBikes.Id = MountainBikes.Id;";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    conn.Open();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int id = (int)reader["Id"];
+                        string brand = (string)reader["Brand"];
+                        double price = (double)Convert.ToDouble(reader["Price"]);
+                        int stock = (int)reader["Stock"];
+                        byte[] imageData = reader.GetSqlBytes(reader.GetOrdinal("ImageData")).Buffer;
+                        BikeType bikeType = (BikeType)Enum.Parse(typeof(BikeType), reader["Type"].ToString());
+
+                        Bike bike;
+                        switch (bikeType)
+                        {
+                            case BikeType.CityBike:
+                                bool lights = (bool)reader["Lights"];
+                                bike = new CityBike(id, brand, price, stock, imageData, bikeType, lights);
+                                break;
+                            case BikeType.ElectricBike:
+                                int batteryCapacity = (int)reader["BatteryCapacity"];
+                                bike = new ElectricBike(id, brand, price, stock, imageData, bikeType, batteryCapacity);
+                                break;
+                            case BikeType.TouringBike:
+                                int nrBags = (int)reader["NrBags"];
+                                bike = new TouringBike(id, brand, price, stock, imageData, bikeType, nrBags);
+                                break;
+                            case BikeType.MountainBike:
+                                int suspension = Convert.ToInt16(reader["Suspension"]);
+                                bike = new MountainBike(id, brand, price, stock, imageData, bikeType, suspension);
+                                break;
+                            default:
+                                bike = new Bike(id, brand, price, stock, imageData, bikeType);
+                                break;
+                        }
+
+                        // Apply filters based on search and bike type
+                        if (string.IsNullOrEmpty(search) || bike.GetBrand().ToLower().Contains(search.ToLower()))
+                        {
+                            if (types.Count() == 0 || types.Contains(Convert.ToInt32(bike.GetBikeType())))
+                            {
+                                bikeList.Add(bike);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return bikeList;
+        }
+
+        public List<Bike> GetBikesForPage(int page)
+        {
+            var bikeList = new List<Bike>();
+            int pageSize = 6; 
+            int offset = (page - 1) * pageSize; 
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    string sql = $"SELECT * FROM AllBikes LEFT JOIN CityBikes ON AllBikes.Id = CityBikes.Id LEFT JOIN ElectricBikes ON AllBikes.Id = ElectricBikes.Id LEFT JOIN TouringBikes ON AllBikes.Id = TouringBikes.Id LEFT JOIN MountainBikes ON AllBikes.Id = MountainBikes.Id ORDER BY AllBikes.Id OFFSET {offset} ROWS FETCH NEXT {pageSize} ROWS ONLY; ";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    conn.Open();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int id = (int)reader["Id"];
+                        string brand = (string)reader["Brand"];
+                        double price = (double)Convert.ToDouble(reader["Price"]);
+                        int stock = (int)reader["Stock"];
+                        byte[] imageData = reader.GetSqlBytes(reader.GetOrdinal("ImageData")).Buffer;
+                        BikeType bikeType = (BikeType)Enum.Parse(typeof(BikeType), reader["Type"].ToString());
+
+                        Bike bike;
+                        switch (bikeType)
+                        {
+                            case BikeType.CityBike:
+                                bool lights = (bool)reader["Lights"];
+                                bike = new CityBike(id, brand, price, stock, imageData, bikeType, lights);
+                                bikeList.Add(bike);
+                                break;
+                            case BikeType.ElectricBike:
+                                int batteryCapacity = (int)reader["BatteryCapacity"];
+                                bike = new ElectricBike(id, brand, price, stock, imageData, bikeType, batteryCapacity);
+                                bikeList.Add(bike);
+                                break;
+                            case BikeType.TouringBike:
+                                int nrBags = (int)reader["NrBags"];
+                                bike = new TouringBike(id, brand, price, stock, imageData, bikeType, nrBags);
+                                bikeList.Add(bike);
+                                break;
+                            case BikeType.MountainBike:
+                                int suspension = Convert.ToInt16(reader["Suspension"]);
+                                bike = new MountainBike(id, brand, price, stock, imageData, bikeType, suspension);
+                                bikeList.Add(bike);
+                                break;
+                            default:
+                                bike = new Bike(id, brand, price, stock, imageData, bikeType);
                                 bikeList.Add(bike);
                                 break;
                         }

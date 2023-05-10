@@ -88,7 +88,7 @@ namespace UniverseBikeHome
 					ClearText();
 
             }
-			catch(Exception ex)
+			catch(ArgumentException ex)
 			{
 				MessageBox.Show(ex.Message);
 			}

@@ -1,0 +1,49 @@
+﻿@page
+@model BikeWebShop.Pages.ReturnRequestModel
+@{
+}
+<h1>Return request</h1>
+<form method="post" asp-page="ReturnRequest" asp-route-id="@Model.bike.GetId()" asp-route-orderid="@Model.order" asp-page-handler="returnitem">
+<div class="row d-flex justify-content-between align-items-center">
+        <p>Item you return:</p>
+        <div class="col-md-3 col-lg-3 col-xl-3">
+            <img src="data:image;base64,@Convert.ToBase64String(Model.bike.GetImageData())" class="img-fluid rounded-3" />
+        </div>
+        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+            <p>@Model.bike.GetBrand()</p>
+        </div>
+        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+            <p>@Model.bike.GetPrice()</p>
+        </div>
+        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+            <div class="form-group">
+                <label asp-for="@Model.request.Reason">Reason for Return:</label>
+                <select class="form-control" asp-for="@Model.request.Reason">
+                    <option value="defective">Defective</option>
+                    <option value="wrong-item">Wrong Item</option>
+                    <option value="changed-mind">Changed Mind</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+            <div class="form-group ml-3">
+                <label asp-for="@Model.request.Comment">Comments(Required):</label>
+                <textarea class="form-control" asp-for="@Model.request.Comment" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="col-md-3 col-lg-2 col-xl-2 text-center">
+            <button type="submit" class="btn btn-outline-dark flex-shrink-0 bg-dark text-white">
+                <a class="btn btn-dark">
+                    Return
+                </a>
+            </button>
+        </div>
+    </div>
+</form>
+@*
+	user places return for the item
+    system places a new returnrequest and changes the item status in the order so it shows differently in the orders page 
+
+
+*@
