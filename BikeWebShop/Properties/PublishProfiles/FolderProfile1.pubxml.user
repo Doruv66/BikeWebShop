@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>\\Mac\Home\Desktop\WebDeployment</_PublishTargetUrl>
+    <History>True|2023-05-12T11:19:23.6614807Z;True|2023-05-11T17:37:35.2142917+02:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

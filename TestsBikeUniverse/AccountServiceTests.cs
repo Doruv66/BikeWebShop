@@ -102,8 +102,6 @@ namespace TestsBikeUniverse
             
             //Assert
             Assert.ThrowsException<ArgumentException>(() => accountService.GetAccountByEmail(email));
-
-
         }
 
         [TestMethod]

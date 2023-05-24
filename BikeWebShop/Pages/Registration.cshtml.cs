@@ -1,5 +1,4 @@
 using BikeLibrary.BLL;
-using BikeLibrary.BLL.Interfaces;
 using BikeWebShop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;

@@ -1,5 +1,4 @@
 ﻿using BikeClassLibrary;
-using BikeLibrary.BLL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +11,22 @@ namespace BikeLibrary.BLL
     {
         public List<Item> items { get; set; }
 
+        public List<ICupon> cupons { get; set; }
+
         public Cart()
         {
             items = new List<Item>();
+            cupons = new List<ICupon>();
         }
 
         public List<Item> Getitems()
         {
             return items;
+        }
+
+        public void AddCupon(ICupon cupon)
+        {
+            cupons.Add(cupon);
         }
 
         public void Add(int bikeid)
@@ -35,6 +42,18 @@ namespace BikeLibrary.BLL
             }
         }
 
+        public bool HasCupon(ICupon cupon)
+        {
+            foreach(var cup in cupons)
+            {
+                if(cup.GetCuponType() == cupon.GetCuponType())
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public void Remove(int bikeid)
         {
             int index = Exists(bikeid);
@@ -43,7 +62,12 @@ namespace BikeLibrary.BLL
 
         public double GetTotalPrice(Inventory inventory)
         {
-            return Convert.ToDouble(items.Sum(i => inventory.GetBike(i.bikeid).GetPrice()));
+            double totalPrice = Convert.ToDouble(items.Sum(i => inventory.GetBike(i.bikeid).GetPrice() * i.quantity));
+            foreach(var cupon in cupons)
+            {
+                totalPrice = cupon.applyCupon(totalPrice);
+            }
+            return totalPrice;
         }
 
         public void Clear()

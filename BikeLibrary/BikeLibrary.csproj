@@ -229,6 +229,9 @@
     <Compile Include="BLL\Bikes\Bike.cs" />
     <Compile Include="BLL\Bikes\BikeType.cs" />
     <Compile Include="BLL\Bikes\CityBike.cs" />
+    <Compile Include="BLL\Cupons\FirstOrderCupon.cs" />
+    <Compile Include="BLL\Cupons\ICupon.cs" />
+    <Compile Include="BLL\Cupons\Over1000Cupon.cs" />
     <Compile Include="BLL\Return.cs" />
     <Compile Include="BLL\Services\ReturnService.cs" />
     <Compile Include="BLL\ShoppingCart\Cart.cs" />

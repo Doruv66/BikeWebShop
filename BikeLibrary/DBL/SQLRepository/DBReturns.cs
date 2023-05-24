@@ -105,5 +105,39 @@ namespace BikeLibrary.DBL.SQLRepository
             }
             return returns;
         }
+
+        public Return GetReturn(int ReturnId)
+        {
+            Return Return;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    string sql = "Select * from Returns where id = @id;";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@id", ReturnId);
+                    conn.Open();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int id = (int)reader["id"];
+                        string reason = (string)reader["reason"];
+                        string comment = (string)reader["comment"];
+                        int bikeid = (int)reader["bikeid"];
+                        int orderid = (int)reader["orderid"];
+
+
+                        Return = new Return(id, reason, comment, bikeid, orderid);
+                        return Return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return null;
+        }
     }
 }

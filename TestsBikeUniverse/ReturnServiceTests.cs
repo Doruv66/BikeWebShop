@@ -17,14 +17,30 @@ namespace TestsBikeUniverse
         {
             // Arrange
             ReturnService returnService = GetMockService();
+            OrderService orderService = new OrderService(new MockOrders());
             Return ret = new Return(1, "not the right product", "it is not the right product", 1, 1);
 
             // Act
-            returnService.AddReturn(ret);
+            orderService.AddOrder(new Order(1, "shipped", 1, new List<Item>(), DateTime.Now), new Inventory(new MockBikes()));
+            returnService.AddReturn(ret, orderService);
 
             // Assert
             CollectionAssert.Contains(returnService.GetAllReturns(), ret);
+        }
 
+        [TestMethod]
+        public void AddReturn_WithInvalidDate_ShouldThrowArgumentException()
+        {
+            // Arrange
+            ReturnService returnService = GetMockService();
+            OrderService orderService = new OrderService(new MockOrders());
+            Order order = new Order(1, "shipped", 1, new List<Item>(), DateTime.Now.AddDays(-16));
+            Return ret = new Return(1, "not the right product", "it is not the right product", 1, 1);
+            // Act
+            orderService.AddOrder(order, new Inventory(new MockBikes()));
+
+            // Assert
+            Assert.ThrowsException<ArgumentException>(() => returnService.AddReturn(ret, orderService));
         }
 
         [TestMethod]
@@ -32,6 +48,8 @@ namespace TestsBikeUniverse
         {
             // Arrange
             ReturnService returnService = GetMockService();
+            OrderService orderService = new OrderService(new MockOrders());
+            orderService.AddOrder(new Order(1, "shipped", 1, new List<Item>(), DateTime.Now), new Inventory(new MockBikes()));
             var returns = new List<Return>{
             new Return(1, "not the right product", "it is not the right product", 1, 1),
             new Return(2, "not the right product", "it is not the right product", 1, 1),
@@ -41,7 +59,7 @@ namespace TestsBikeUniverse
             // Act
             foreach (var ret in returns)
             {
-                returnService.AddReturn(ret);
+                returnService.AddReturn(ret, orderService);
             }
             var result = returnService.GetAllReturns();
 
@@ -49,10 +67,6 @@ namespace TestsBikeUniverse
             CollectionAssert.AreEquivalent(result, returns);
         }
         
-
-
-
-
 
         private ReturnService GetMockService()
         {

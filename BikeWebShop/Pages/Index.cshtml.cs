@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BikeClassLibrary;
-using BikeLibrary.BLL.Interfaces;
 using BikeLibrary.DBL;
 
 namespace BikeWebShop.Pages

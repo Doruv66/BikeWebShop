@@ -16,7 +16,6 @@
                 {
                     @foreach (var order in Model.orders)
                     {
-                        <form method="post" asp-page="cart" asp-page-handler="update">
                             <p>Order:</p>
                             <div class="card rounded-3 mb-4">
                                 <div class="card-body p-4">
@@ -26,15 +25,19 @@
                                             <p>@order.GetStatus()</p>
                                         </div>
                                         <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                            <p>Shipping Addrres</p>
-                                            <p>Name: @order.GetShipping().GetName()</p>
-                                            <p>Last Name: @order.GetShipping().GetLastName()</p>
-                                            <p>Zip Code: @order.GetShipping().GetPostalCode()</p>
-                                            <p>Addrress: @order.GetShipping().GetAddrress()</p>
+                                            <p> 
+                                                Shipping Addrres:
+                                                @order.GetShipping().GetName()
+                                                @order.GetShipping().GetLastName()
+                                                @order.GetShipping().GetPostalCode()
+                                                @order.GetShipping().GetAddrress()
+                                            </p>
                                         </div>
-                                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                            <p>Order Placed on:</p>
-                                            <p>@order.GetOrderDate().ToString("MMMM dd")</p>
+                                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                            <p>
+                                                Order Placed on:
+                                                @order.GetOrderDate().ToString("MMMM dd")
+                                            </p>
                                         </div>
                                         <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                                             <p>Total Price:</p>
@@ -67,7 +70,7 @@
                                                     {
                                                         <div class="col-md-3 col-lg-2 col-xl-2 text-center">
                                                             <button class="btn btn-outline-dark flex-shrink-0 bg-dark text-white">
-                                                                <a asp-page="ReturnRequest" asp-route-id="@item.bikeid" asp-route-orderid="@order.GetId()" class="btn btn-dark">
+                                                                <a asp-page="Orders" asp-page-handler="returnrequest" asp-route-bikeid="@item.bikeid" asp-route-orderid="@order.GetId()" class="btn btn-dark">
                                                                     Return
                                                                 </a>
                                                             </button>
@@ -90,7 +93,6 @@
                                 </div>
                             </div>
                             }
-                         </form>
                     }
                     
                 }

@@ -14,5 +14,7 @@ namespace BikeLibrary.DBL.Interfaces
         void AddReturn(Return Return);
 
         void ApproveReturn(Return Return);
+
+        Return GetReturn(int ReturnId);
     }
 }

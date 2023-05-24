@@ -105,7 +105,7 @@ namespace BikeLibrary.DBL
             return accounts;
         }
 
-        public void SetShippingInformation(Account acc)
+        public void SetShippingInformation(int accid, ShippingInfo shippingInfo)
         {
             try
             {
@@ -115,11 +115,11 @@ namespace BikeLibrary.DBL
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
                         conn.Open();
-                        cmd.Parameters.AddWithValue("@AccId", acc.GetId());
-                        cmd.Parameters.AddWithValue("@FirstName", acc.GetShippingInfo().GetName());
-                        cmd.Parameters.AddWithValue("@LastName", acc.GetShippingInfo().GetLastName());
-                        cmd.Parameters.AddWithValue("@Addrress", acc.GetShippingInfo().GetAddrress());
-                        cmd.Parameters.AddWithValue("@PostalCode", acc.GetShippingInfo().GetPostalCode());
+                        cmd.Parameters.AddWithValue("@AccId", accid);
+                        cmd.Parameters.AddWithValue("@FirstName", shippingInfo.GetName());
+                        cmd.Parameters.AddWithValue("@LastName", shippingInfo.GetLastName());
+                        cmd.Parameters.AddWithValue("@Addrress", shippingInfo.GetAddrress());
+                        cmd.Parameters.AddWithValue("@PostalCode", shippingInfo.GetPostalCode());
                         cmd.ExecuteNonQuery();
                     }
                 }

@@ -5,7 +5,6 @@ using BikeLibrary.BLL;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
-using BikeLibrary.BLL.Interfaces;
 
 namespace BikeWebShop.Pages
 {

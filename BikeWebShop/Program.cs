@@ -1,7 +1,6 @@
 using BikeClassLibrary;
 using BikeClassLibrary.DBL;
 using BikeLibrary.BLL;
-using BikeLibrary.BLL.Interfaces;
 using BikeLibrary.DBL;
 using BikeLibrary.DBL.Interfaces;
 using BikeLibrary.DBL.SQLRepository;

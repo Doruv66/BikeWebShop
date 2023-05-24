@@ -40,9 +40,10 @@ namespace TestsBikeUniverse.MockData
             return acc;
         }
 
-        public void SetShippingInformation(Account acc)
+        public void SetShippingInformation(int id, ShippingInfo shippingInfo)
         {
-            throw new NotImplementedException();
+            Account account = accounts.Find(account => account.GetId() == id);
+            account.SetShippingInfo(shippingInfo);
         }
     }
 }

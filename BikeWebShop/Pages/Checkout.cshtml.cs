@@ -1,6 +1,5 @@
 using BikeClassLibrary;
 using BikeLibrary.BLL;
-using BikeLibrary.BLL.Interfaces;
 using BikeLibrary.DBL;
 using BikeWebShop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -54,8 +53,7 @@ namespace BikeWebShop.Pages
             Cart cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
             if (ModelState.IsValid)
             {
-                    acc.SetShippingInfo(new ShippingInfo(shipping.Name, shipping.LastName, shipping.PostalCode, shipping.Address));
-                    Service.SetShippingInformation(acc);
+                    Service.SetShippingInformation(accid, new ShippingInfo(shipping.Name, shipping.LastName, shipping.PostalCode, shipping.Address));
                     acc = Service.GetShippingInformation(acc);
                     Orders.AddOrder(new Order(1, "placed", accid, cart.Getitems(), DateTime.Now, acc.GetShippingInfo()), Inventory);
                     cart.Clear();

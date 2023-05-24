@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 namespace BikeClassLibrary
 {
 
-	public class Bike : IBike
+	public class Bike 
 	{
 		private int id;
 

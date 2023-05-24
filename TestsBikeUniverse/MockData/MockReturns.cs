@@ -31,5 +31,10 @@ namespace TestsBikeUniverse.MockData
         {
             return returns;
         }
+
+        public Return GetReturn(int ReturnId)
+        {
+            return returns.Find(r => r.GetId() == ReturnId);
+        }
     }
 }

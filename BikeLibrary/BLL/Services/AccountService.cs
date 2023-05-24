@@ -1,5 +1,4 @@
 ﻿using BikeClassLibrary.DBL;
-using BikeLibrary.BLL.Interfaces;
 using BikeLibrary.DBL;
 using System;
 using System.Collections.Generic;
@@ -46,14 +45,14 @@ namespace BikeLibrary.BLL
             Account account = dbaccounts.GetAccountByEmail(email);
             if (account == null)
             {
-                throw new ArgumentException("Email does not exist");
+                 throw new ArgumentException("Email does not exist");
             }
             return account;
         }
 
-        public void SetShippingInformation(Account acc)
+        public void SetShippingInformation(int id, ShippingInfo shippingInfo)
         {
-            dbaccounts.SetShippingInformation(acc);
+            dbaccounts.SetShippingInformation(id, shippingInfo);
         }
 
         public Account GetAccountByid(int id)

@@ -1,4 +1,5 @@
 ﻿@page 
+@using BikeLibrary.BLL.Cupons;
 @model BikeWebShop.Pages.ShoppingCartModel
 @{
 }
@@ -15,7 +16,6 @@
                 {
                     @foreach (var item in Model.cart.Getitems())
                     {
-                        <form method="post" asp-page="cart" asp-page-handler="update">
                         <div class="card rounded-3 mb-4">
                             <div class="card-body p-4">
                                 <div class="row d-flex justify-content-between align-items-center">
@@ -37,14 +37,67 @@
                                 </div>
                             </div>
                         </div>
-                        </form>
                     }
                 }
                 else
                 {
                     <h1>No Items in cart Yet</h1>
                 }
-
+                <h1>Cupons Available</h1>
+                @if (Model.cart != null && Model.cart.HasCupon(new FirstOrderCupon(20)) && Model.cart.Getitems().Count > 0)
+                {
+                    <div class="container my-5">
+                        <div class="row d-flex justify-content-center align-items-center">
+                            <div class="col-sm-6">
+                                <div class="coupon bg-white rounded mb-3 d-flex justify-content-between">
+                                    <div class="tengah py-3 d-flex w-100 justify-content-center">
+                                        <div>
+                                            <span class="badge badge-success">Valid</span>
+                                            <h3 class="lead">First Order Cupon</h3>
+                                            <p class="text-muted mb-0">You will get a 20 &euro; discount</p>
+                                        </div>
+                                    </div>
+                                    <div class="kanan">
+                                        <div class="info m-3 d-flex align-items-center">
+                                            <div class="w-100">
+                                                <a asp-page="/ShoppingCart" asp-page-handler="firstorder" class="btn btn-sm btn-outline-danger btn-block">
+                                                    Apply
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (Model.cart != null && Model.cart.HasCupon(new Over1000Cupon(20)) && Model.cart.GetTotalPrice(Model.inventory) > 1000)
+                {
+                    <div class="container my-5">
+                        <div class="row d-flex justify-content-center align-items-center">
+                            <div class="col-sm-6">
+                                <div class="coupon bg-white rounded mb-3 d-flex justify-content-between">
+                                    <div class="tengah py-3 d-flex w-100 justify-content-center">
+                                        <div>
+                                            <span class="badge badge-success">Valid</span>
+                                            <h3 class="lead">Over 1000 &euro; Cupon  </h3>
+                                            <p class="text-muted mb-0">You will get a 10% discount</p>
+                                        </div>
+                                    </div>
+                                    <div class="kanan">
+                                        <div class="info m-3 d-flex align-items-center">
+                                            <div class="w-100">
+                                                <a asp-page="/ShoppingCart" asp-page-handler="over1000" class="btn btn-sm btn-outline-danger btn-block">
+                                                    Apply
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
                 @if(Model.cart != null && Model.cart.Getitems().Count > 0)
                 {
                     <div class="card">
@@ -52,7 +105,7 @@
                             <button type="button" class="btn btn-dark btn-block btn-lg">
                                 <a class="text-decoration-none text-white" asp-area="" asp-page="/Checkout">Proceed to Pay</a>
                             </button>
-                            <h4>Total Price: @Model.cart.GetTotalPrice(Model.inventory).ToString("C") &euro;</h4>
+                            <h4>Total Price: @Model.cart.GetTotalPrice(Model.inventory).ToString("C") </h4>
                         </div>
                     </div>
                 }

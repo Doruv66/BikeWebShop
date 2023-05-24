@@ -1,6 +1,5 @@
 using BikeClassLibrary;
 using BikeLibrary.BLL;
-using BikeLibrary.BLL.Interfaces;
 using BikeLibrary.DBL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -24,6 +23,13 @@ namespace BikeWebShop.Pages
         public void OnGet()
         {
             orders = service.GetUserOrders(Convert.ToInt16(User.FindFirst("id").Value));
+        }
+
+        public IActionResult OnGetReturnRequest(int bikeid, int orderid)
+        {
+            HttpContext.Session.SetInt32("bikeid", bikeid);
+            HttpContext.Session.SetInt32("orderid", orderid);
+            return RedirectToPage("ReturnRequest");
         }
     }
 }

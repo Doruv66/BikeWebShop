@@ -1,0 +1,30 @@
+/Users/doruvieru/Projects/OODPractice/OODPractice/obj/Debug/net7.0/OODPractice.csproj.AssemblyReference.cache
+/Users/doruvieru/Projects/OODPractice/OODPractice/obj/Debug/net7.0/OODPractice.GeneratedMSBuildEditorConfig.editorconfig
+/Users/doruvieru/Projects/OODPractice/OODPractice/obj/Debug/net7.0/OODPractice.AssemblyInfoInputs.cache
+/Users/doruvieru/Projects/OODPractice/OODPractice/obj/Debug/net7.0/OODPractice.AssemblyInfo.cs
+/Users/doruvieru/Projects/OODPractice/OODPractice/obj/Debug/net7.0/OODPractice.csproj.CoreCompileInputs.cache
+/Users/doruvieru/Projects/OODPractice/OODPractice/bin/Debug/net7.0/OODPractice
+/Users/doruvieru/Projects/OODPractice/OODPractice/bin/Debug/net7.0/OODPractice.deps.json
+/Users/doruvieru/Projects/OODPractice/OODPractice/bin/Debug/net7.0/OODPractice.runtimeconfig.json
+/Users/doruvieru/Projects/OODPractice/OODPractice/bin/Debug/net7.0/OODPractice.dll
+/Users/doruvieru/Projects/OODPractice/OODPractice/bin/Debug/net7.0/OODPractice.pdb
+/Users/doruvieru/Projects/OODPractice/OODPractice/obj/Debug/net7.0/OODPractice.dll
+/Users/doruvieru/Projects/OODPractice/OODPractice/obj/Debug/net7.0/refint/OODPractice.dll
+/Users/doruvieru/Projects/OODPractice/OODPractice/obj/Debug/net7.0/OODPractice.pdb
+/Users/doruvieru/Projects/OODPractice/OODPractice/obj/Debug/net7.0/OODPractice.genruntimeconfig.cache
+/Users/doruvieru/Projects/OODPractice/OODPractice/obj/Debug/net7.0/ref/OODPractice.dll
+/Users/doruvieru/Desktop/individual Assigment Semester 2/OODPractice/bin/Debug/net7.0/OODPractice
+/Users/doruvieru/Desktop/individual Assigment Semester 2/OODPractice/bin/Debug/net7.0/OODPractice.deps.json
+/Users/doruvieru/Desktop/individual Assigment Semester 2/OODPractice/bin/Debug/net7.0/OODPractice.runtimeconfig.json
+/Users/doruvieru/Desktop/individual Assigment Semester 2/OODPractice/bin/Debug/net7.0/OODPractice.dll
+/Users/doruvieru/Desktop/individual Assigment Semester 2/OODPractice/bin/Debug/net7.0/OODPractice.pdb
+/Users/doruvieru/Desktop/individual Assigment Semester 2/OODPractice/obj/Debug/net7.0/OODPractice.csproj.AssemblyReference.cache
+/Users/doruvieru/Desktop/individual Assigment Semester 2/OODPractice/obj/Debug/net7.0/OODPractice.GeneratedMSBuildEditorConfig.editorconfig
+/Users/doruvieru/Desktop/individual Assigment Semester 2/OODPractice/obj/Debug/net7.0/OODPractice.AssemblyInfoInputs.cache
+/Users/doruvieru/Desktop/individual Assigment Semester 2/OODPractice/obj/Debug/net7.0/OODPractice.AssemblyInfo.cs
+/Users/doruvieru/Desktop/individual Assigment Semester 2/OODPractice/obj/Debug/net7.0/OODPractice.csproj.CoreCompileInputs.cache
+/Users/doruvieru/Desktop/individual Assigment Semester 2/OODPractice/obj/Debug/net7.0/OODPractice.dll
+/Users/doruvieru/Desktop/individual Assigment Semester 2/OODPractice/obj/Debug/net7.0/refint/OODPractice.dll
+/Users/doruvieru/Desktop/individual Assigment Semester 2/OODPractice/obj/Debug/net7.0/OODPractice.pdb
+/Users/doruvieru/Desktop/individual Assigment Semester 2/OODPractice/obj/Debug/net7.0/OODPractice.genruntimeconfig.cache
+/Users/doruvieru/Desktop/individual Assigment Semester 2/OODPractice/obj/Debug/net7.0/ref/OODPractice.dll
