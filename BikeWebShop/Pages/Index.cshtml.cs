@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BikeClassLibrary;
 using BikeLibrary.DBL;
+using BikeLibrary.BLL.Services;
+using BikeLibrary.DBL.Interfaces;
+using BikeLibrary.BLL.Cupons;
 
 namespace BikeWebShop.Pages
 {

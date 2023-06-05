@@ -30,6 +30,7 @@ builder.Services.AddTransient<IAccountRepository>(s => new DBAccounts(connString
 builder.Services.AddTransient<IReturnRepository>(s => new DBReturns(connString));
 builder.Services.AddTransient<IBikeRepository>(s => new DBBikes(connString));
 builder.Services.AddTransient<IOrderRepository>(s => new DBOrders(connString));
+builder.Services.AddTransient<ICouponRepository>(s => new DBCoupons(connString));
 
 
 var app = builder.Build();

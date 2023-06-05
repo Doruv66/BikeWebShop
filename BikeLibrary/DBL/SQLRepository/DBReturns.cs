@@ -26,7 +26,7 @@ namespace BikeLibrary.DBL.SQLRepository
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {
-                    string sql = "INSERT INTO Returns (reason, comment, bikeid, orderid) VALUES (@reason, @comment, @bikeid, @orderid)";
+                    string sql = "INSERT INTO Returns (reason, comment, bikeid, orderid, Date) VALUES (@reason, @comment, @bikeid, @orderid, @Date)";
                     conn.Open();
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
@@ -34,7 +34,8 @@ namespace BikeLibrary.DBL.SQLRepository
                         cmd.Parameters.AddWithValue("@comment", Return.GetComment());
                         cmd.Parameters.AddWithValue("@bikeid", Return.GetBikeId());
                         cmd.Parameters.AddWithValue("@orderid", Return.GetOrderId());
-                        cmd.ExecuteNonQuery();
+						cmd.Parameters.AddWithValue("@Date", Return.GetReturnTime());
+						cmd.ExecuteNonQuery();
                     }
                     SqlCommand ChangeItemStatus= new SqlCommand("Update OrderItems Set status = @status where OrderId = @OrderID and BikeId = @BikeID", conn);
                     ChangeItemStatus.Parameters.AddWithValue("@status", "requested");
@@ -93,9 +94,10 @@ namespace BikeLibrary.DBL.SQLRepository
                         string comment = (string)reader["comment"];
                         int bikeid = (int)reader["bikeid"];
                         int orderid = (int)reader["orderid"];
+						DateTime date = (DateTime)reader["Date"];
 
 
-                        returns.Add(new Return(id, reason, comment, bikeid, orderid));
+						returns.Add(new Return(id, reason, comment, bikeid, orderid, date));
                     }
                 }
             }
@@ -126,9 +128,11 @@ namespace BikeLibrary.DBL.SQLRepository
                         string comment = (string)reader["comment"];
                         int bikeid = (int)reader["bikeid"];
                         int orderid = (int)reader["orderid"];
+						DateTime date = (DateTime)reader["Date"];
 
 
-                        Return = new Return(id, reason, comment, bikeid, orderid);
+
+						Return = new Return(id, reason, comment, bikeid, orderid, date);
                         return Return;
                     }
                 }

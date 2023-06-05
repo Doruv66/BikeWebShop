@@ -13,14 +13,16 @@ namespace BikeLibrary.BLL
         private string comment;
         private int bikeid;
         private int orderid;
+        private DateTime returnTime;
 
-        public Return(int id, string reason, string comment, int bikeid, int orderid)
+        public Return(int id, string reason, string comment, int bikeid, int orderid, DateTime time)
         {
             this.id = id;
             this.reason = reason;
             this.comment = comment;
             this.bikeid = bikeid;
             this.orderid = orderid;
+            this.returnTime = time;
         }
 
         public int GetId() { return id; }
@@ -28,6 +30,7 @@ namespace BikeLibrary.BLL
         public string GetComment() { return comment; }
         public int GetBikeId() { return bikeid; }
         public int GetOrderId() { return orderid; }
+        public DateTime GetReturnTime() { return returnTime; }
 
     }
 }

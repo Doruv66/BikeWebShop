@@ -1,6 +1,9 @@
 using BikeClassLibrary;
 using BikeLibrary.BLL;
+using BikeLibrary.BLL.Cupons;
+using BikeLibrary.BLL.Services;
 using BikeLibrary.DBL;
+using BikeLibrary.DBL.Interfaces;
 using BikeWebShop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -16,18 +19,23 @@ namespace BikeWebShop.Pages
         public AccountService Service { get; }
         public Account acc { get; set; }
         public OrderService Orders { get; }
+        public CouponService coupons { get; set; }
         [BindProperty]
         public ShippingForm shipping { get; set; }
 
-        public CheckoutModel(IBikeRepository bikerep, IAccountRepository accrep, IOrderRepository orderrep)
+        [BindProperty]
+        public string CouponCode { get; set; }
+
+        public CheckoutModel(IBikeRepository bikerep, IAccountRepository accrep, IOrderRepository orderrep, ICouponRepository couponrep)
         {
             Inventory = new Inventory(bikerep);
             Service = new AccountService(accrep);
             Orders = new OrderService(orderrep);
+            coupons = new CouponService(couponrep);
         }
 
         public void OnGet()
-        {
+        { 
             int accid = Convert.ToInt32(User.FindFirst("id").Value);
             acc = Service.GetAccountByid(accid);
             acc = Service.GetShippingInformation(acc);
@@ -69,6 +77,24 @@ namespace BikeWebShop.Pages
             }
             return Page();
         }
-            
+
+        public IActionResult OnPostApplyCoupon()
+        {
+            Cart cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
+            try
+            {
+                var coupon = coupons.ValidateCoupon(CouponCode);
+                cart.AddCupon(coupon);
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+                return RedirectToPage("Checkout");
+            }
+            catch(Exception ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+            }
+            return Page();
+        }
+
+
     }
 }

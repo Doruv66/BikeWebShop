@@ -68,14 +68,16 @@
                                                 case "ordered":
                                                     @if(order.GetOrderDate().AddDays(15) > DateTime.Now)
                                                     {
-                                                        <div class="col-md-3 col-lg-2 col-xl-2 text-center">
-                                                            <button class="btn btn-outline-dark flex-shrink-0 bg-dark text-white">
-                                                                <a asp-page="Orders" asp-page-handler="returnrequest" asp-route-bikeid="@item.bikeid" asp-route-orderid="@order.GetId()" class="btn btn-dark">
-                                                                    Return
-                                                                </a>
-                                                            </button>
-                                                            <p> The return is valid until @order.GetOrderDate().AddDays(15).ToString("MMMM dd")</p>
-                                                        </div>
+                                                        <form method="post" asp-page="ReturnRequest" asp-page-handler="returnrequest">
+                                                            <div class="col-md-3 col-lg-2 col-xl-2 text-center">
+                                                                <input type="hidden" name="bikeid" value="@item.bikeid"/>
+                                                                <input type="hidden" name="orderid" value="@order.GetId()" />
+                                                                <button type="submit" class="btn btn-outline-dark flex-shrink-0 bg-dark text-white">
+                                                                        Return
+                                                                </button>
+                                                                <p> The return is valid until @order.GetOrderDate().AddDays(15).ToString("MMMM dd")</p>
+                                                            </div>
+                                                        </form>
                                                     }
                                                     break;
                                                 case "requested":

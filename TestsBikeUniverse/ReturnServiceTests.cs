@@ -18,7 +18,7 @@ namespace TestsBikeUniverse
             // Arrange
             ReturnService returnService = GetMockService();
             OrderService orderService = new OrderService(new MockOrders());
-            Return ret = new Return(1, "not the right product", "it is not the right product", 1, 1);
+            Return ret = new Return(1, "not the right product", "it is not the right product", 1, 1, DateTime.Now);
 
             // Act
             orderService.AddOrder(new Order(1, "shipped", 1, new List<Item>(), DateTime.Now), new Inventory(new MockBikes()));
@@ -35,7 +35,7 @@ namespace TestsBikeUniverse
             ReturnService returnService = GetMockService();
             OrderService orderService = new OrderService(new MockOrders());
             Order order = new Order(1, "shipped", 1, new List<Item>(), DateTime.Now.AddDays(-16));
-            Return ret = new Return(1, "not the right product", "it is not the right product", 1, 1);
+            Return ret = new Return(1, "not the right product", "it is not the right product", 1, 1, DateTime.Now);
             // Act
             orderService.AddOrder(order, new Inventory(new MockBikes()));
 
@@ -51,9 +51,9 @@ namespace TestsBikeUniverse
             OrderService orderService = new OrderService(new MockOrders());
             orderService.AddOrder(new Order(1, "shipped", 1, new List<Item>(), DateTime.Now), new Inventory(new MockBikes()));
             var returns = new List<Return>{
-            new Return(1, "not the right product", "it is not the right product", 1, 1),
-            new Return(2, "not the right product", "it is not the right product", 1, 1),
-            new Return(3, "not the right product", "it is not the right product", 1, 1)
+            new Return(1, "not the right product", "it is not the right product", 1, 1, DateTime.Now),
+            new Return(2, "not the right product", "it is not the right product", 1, 1, DateTime.Now),
+            new Return(3, "not the right product", "it is not the right product", 1, 1, DateTime.Now)
             };
 
             // Act

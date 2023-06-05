@@ -1,0 +1,27 @@
+﻿<Properties StartupConfiguration="{8E32BD4F-8A57-4FDB-9EAF-C43F6FAA4B25}|Default">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.OODPractice PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="OODPractice/Program.cs">
+    <Files>
+      <File FileName="OODPractice/Program.cs" Line="8" Column="10" />
+      <File FileName="OODPractice/TrainService.cs" />
+      <File FileName="OODPractice/Wagon.cs" Line="25" Column="21" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="OODPractice" expanded="True">
+            <Node name="OODPractice" expanded="True">
+              <Node name="Program.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>

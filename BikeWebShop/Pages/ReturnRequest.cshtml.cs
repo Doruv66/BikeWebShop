@@ -34,16 +34,19 @@ namespace BikeWebShop.Pages
 
         public void OnGet()
         {
-            int bikeid = Convert.ToInt32(HttpContext.Session.GetInt32("bikeid"));
-            bike = inventory.GetBike(bikeid);
-            order = Convert.ToInt32(HttpContext.Session.GetInt32("orderid"));
+        }
+
+        public void OnPostReturnRequest()
+        {
+            bike = inventory.GetBike(Convert.ToInt32(Request.Form["bikeid"]));
+            order = Convert.ToInt32(Request.Form["orderid"]);
         }
 
         public IActionResult OnPostReturnItem(int id, int orderid)
         {
             if (ModelState.IsValid)
             {
-                returnService.AddReturn(new Return(1, request.Reason, request.Comment, id, orderid), orderService);
+                returnService.AddReturn(new Return(1, request.Reason, request.Comment, id, orderid, DateTime.Now), orderService);
                 return RedirectToPage("Orders");
             }
             return RedirectToPage("ReturnRequest");

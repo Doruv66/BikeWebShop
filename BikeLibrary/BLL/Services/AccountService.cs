@@ -11,7 +11,7 @@ namespace BikeLibrary.BLL
     public class AccountService
     {
         private List<Account> accounts;
-        IAccountRepository dbaccounts;
+        private IAccountRepository dbaccounts;
 
         public AccountService(IAccountRepository _dbaccounts)
         {

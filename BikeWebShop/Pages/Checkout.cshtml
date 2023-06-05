@@ -1,9 +1,9 @@
-﻿@page
+﻿
+@page
 @model BikeWebShop.Pages.CheckoutModel
 @{
 }
 <div class="d-flex justify-content-center">
-<form method="post">
     <div class="col-md-9 mb-4" align-items-center">
         <div class="card mb-4">
             <div class="card-header py-3">
@@ -39,6 +39,7 @@
                 }
                 else
                 {
+                    <form method="post">
                         <div class="row mb-4">
                             <div class="col">
                                 <div class="form-outline">
@@ -66,6 +67,7 @@
                             <span asp-validation-for="shipping.PostalCode"></span>
                             <label class="form-label" asp-for="shipping.PostalCode">Postal code</label>
                         </div>
+                    </form>
                 }
                     
 
@@ -103,7 +105,29 @@
                                            placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
                                     <label class="form-label" for="typeText">Cvv</label>
                                 </div>
+
                             </div>
+
+                            <form method="post" asp-page="Checkout" asp-page-handler="applycoupon">
+                                 <div class="col-12 col-xl-6">
+                                    <div class="form-outline mb-4 mb-xl-5">
+                                        <div class="form-outline mb-4 mb-xl-5">
+                                        <input asp-for="CouponCode" class="form-control" />
+                                        <label class="form-label" asp-for="CouponCode">Coupon:</label>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-dark btn-block btn-lg">
+                                        <div class="d-flex justify-content-between text-white-50">
+                                            <span>Apply</span>
+                                        </div>
+                                    </button>
+                                        @if(TempData["ErrorMessage"] != null)
+                                        {
+                                            <p>@TempData["ErrorMessage"]</p>
+                                        }
+                                 </div>
+                            </form>
+                            
                         </div>
                     </div>
                     <div class="col-lg-4 col-xl-3">
@@ -123,9 +147,9 @@
             </div>
         </div>
     </div>
-</form>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+

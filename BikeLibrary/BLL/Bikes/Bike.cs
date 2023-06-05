@@ -30,7 +30,6 @@ namespace BikeClassLibrary
 			imageData = _imageData;
 			type = _type;
 		}
-
 		public int GetId()
 		{
 			return this.id;

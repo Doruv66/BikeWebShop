@@ -45,21 +45,5 @@ namespace BikeWebShop.Pages
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             return RedirectToPage("ShoppingCart");
         }
-
-        public IActionResult OnGetFirstOrder()
-        {
-            cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
-            cart.AddCupon(new FirstOrderCupon(20));
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-            return RedirectToPage("ShoppingCart");
-        }
-
-        public IActionResult OnGetOver1000()
-        {
-            cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
-            cart.AddCupon(new Over1000Cupon(10));
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-            return RedirectToPage("ShoppingCart");
-        }
     }
 }

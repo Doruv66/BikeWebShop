@@ -25,11 +25,5 @@ namespace BikeWebShop.Pages
             orders = service.GetUserOrders(Convert.ToInt16(User.FindFirst("id").Value));
         }
 
-        public IActionResult OnGetReturnRequest(int bikeid, int orderid)
-        {
-            HttpContext.Session.SetInt32("bikeid", bikeid);
-            HttpContext.Session.SetInt32("orderid", orderid);
-            return RedirectToPage("ReturnRequest");
-        }
     }
 }
