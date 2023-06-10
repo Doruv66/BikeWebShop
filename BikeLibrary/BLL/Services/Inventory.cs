@@ -74,7 +74,7 @@ namespace BikeClassLibrary
 
 		public List<Bike> GetBikesForPage(int page)
 		{
-			return dbbikes.GetBikesForPage((int)page);
+			return dbbikes.GetBikesForPage(page);
 		}
 
         public List<Bike> GetBikesBySearch(int[] types, string search)

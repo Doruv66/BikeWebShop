@@ -107,27 +107,41 @@
                                 </div>
 
                             </div>
-
-                            <form method="post" asp-page="Checkout" asp-page-handler="applycoupon">
-                                 <div class="col-12 col-xl-6">
-                                    <div class="form-outline mb-4 mb-xl-5">
+                            @if (Model.cart.coupon == null)
+                            {
+                                <form method="post" asp-page="Checkout" asp-page-handler="applycoupon">
+                                    <div class="col-12 col-xl-6">
                                         <div class="form-outline mb-4 mb-xl-5">
-                                        <input asp-for="CouponCode" class="form-control" />
-                                        <label class="form-label" asp-for="CouponCode">Coupon:</label>
-                                    </div>
+                                            <div class="form-outline mb-4 mb-xl-5">
+                                                <input asp-for="CouponCode" class="form-control" />
+                                                <label class="form-label" asp-for="CouponCode">Coupon:</label>
+                                            </div>
 
-                                    <button type="submit" class="btn btn-dark btn-block btn-lg">
-                                        <div class="d-flex justify-content-between text-white-50">
-                                            <span>Apply</span>
+                                            <button type="submit" class="btn btn-dark btn-block btn-lg">
+                                                <div class="d-flex justify-content-between text-white-50">
+                                                    <span>Apply</span>
+                                                </div>
+                                            </button>
+                                            @if (TempData["ErrorMessage"] != null)
+                                            {
+                                                <p>@TempData["ErrorMessage"]</p>
+                                            }
                                         </div>
-                                    </button>
-                                        @if(TempData["ErrorMessage"] != null)
-                                        {
-                                            <p>@TempData["ErrorMessage"]</p>
-                                        }
-                                 </div>
-                            </form>
-                            
+                                    </div>
+                                </form>
+                            }
+                            else
+                            {
+                                <div class="form-outline mb-4 mb-xl-5">
+                                    <div class="form-outline mb-4 mb-xl-5">
+
+                                        <p>Coupons Applied:</p>
+                                        <p>@Model.cart.coupon.type</p>
+                                        <p>@Model.cart.coupon.strategy.GetDiscount() % discount</p>
+                                    </div>
+                                </div>
+                            }
+
                         </div>
                     </div>
                     <div class="col-lg-4 col-xl-3">

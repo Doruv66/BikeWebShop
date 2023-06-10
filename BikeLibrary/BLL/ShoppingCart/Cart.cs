@@ -12,12 +12,12 @@ namespace BikeLibrary.BLL
     {
         public List<Item> items { get; set; }
 
-        public List<Coupon> cupons { get; set; }
+        public Coupon coupon { get; set; }
 
         public Cart()
         {
             items = new List<Item>();
-            cupons = new List<Coupon>();
+            coupon = null;
         }
 
         public List<Item> Getitems()
@@ -25,9 +25,9 @@ namespace BikeLibrary.BLL
             return items;
         }
 
-        public void AddCupon(Coupon cupon)
+        public void SetCoupon(Coupon _coupon)
         {
-            cupons.Add(cupon);
+            coupon = _coupon;
         }
 
         public void Add(int bikeid)
@@ -43,19 +43,6 @@ namespace BikeLibrary.BLL
             }
         }
 
-        public bool HasCupon(ICouponStrategy cupon)
-        {
-            //foreach(var cup in cupons)
-            //{
-            //    if(cup.GetCuponType() == cupon.GetCuponType())
-            //    {
-            //        return false;
-            //    }
-            //}
-            //return true;
-            throw new NotImplementedException();
-        }
-
         public void Remove(int bikeid)
         {
             int index = Exists(bikeid);
@@ -65,9 +52,9 @@ namespace BikeLibrary.BLL
         public double GetTotalPrice(Inventory inventory)
         {
             double totalPrice = Convert.ToDouble(items.Sum(i => inventory.GetBike(i.bikeid).GetPrice() * i.quantity));
-            foreach(var cupon in cupons)
+            if(coupon != null)
             {
-                totalPrice = cupon.Apply(totalPrice);
+                totalPrice = coupon.Apply(totalPrice);
             }
             return totalPrice;
         }
@@ -75,6 +62,7 @@ namespace BikeLibrary.BLL
         public void Clear()
         {
             items.Clear();
+            coupon = null;
         }
 
         public int Exists(int bikeid)

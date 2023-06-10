@@ -13,7 +13,7 @@ namespace TestsBikeUniverse
         [TestMethod]
         public void ConstructorTest()
         {
-            Return ret = new Return(1, "wrong item", "I have received the wrong item", 2, 3);
+            Return ret = new Return(1, "wrong item", "I have received the wrong item", 2, 3, DateTime.Now);
 
             Assert.AreEqual(1, ret.GetId());
             Assert.AreEqual("wrong item", ret.GetReason());

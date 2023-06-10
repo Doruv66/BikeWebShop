@@ -117,8 +117,6 @@ namespace TestsBikeUniverse
 
             // Assert
             CollectionAssert.AreEquivalent(result, orders);
-
-
         }
 
         public OrderService GetMockService()

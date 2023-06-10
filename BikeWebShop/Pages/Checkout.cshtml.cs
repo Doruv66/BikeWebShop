@@ -18,6 +18,8 @@ namespace BikeWebShop.Pages
         public Inventory Inventory { get; set; }
         public AccountService Service { get; }
         public Account acc { get; set; }
+
+        public Cart cart { get; set; }
         public OrderService Orders { get; }
         public CouponService coupons { get; set; }
         [BindProperty]
@@ -39,7 +41,7 @@ namespace BikeWebShop.Pages
             int accid = Convert.ToInt32(User.FindFirst("id").Value);
             acc = Service.GetAccountByid(accid);
             acc = Service.GetShippingInformation(acc);
-            Cart cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
+            cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
             Total = cart.GetTotalPrice(Inventory);
         }
 
@@ -48,7 +50,7 @@ namespace BikeWebShop.Pages
             int accid = Convert.ToInt32(User.FindFirst("id").Value);
             acc = Service.GetAccountByid(accid);
             acc.SetShippingInfo(null);
-            Cart cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
+            cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
             Total = cart.GetTotalPrice(Inventory);
             return Page();
         }
@@ -58,7 +60,7 @@ namespace BikeWebShop.Pages
             int accid = Convert.ToInt32(User.FindFirst("id").Value);
             acc = Service.GetAccountByid(accid);
             acc = Service.GetShippingInformation(acc);
-            Cart cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
+            cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
             if (ModelState.IsValid)
             {
                     Service.SetShippingInformation(accid, new ShippingInfo(shipping.Name, shipping.LastName, shipping.PostalCode, shipping.Address));
@@ -80,11 +82,11 @@ namespace BikeWebShop.Pages
 
         public IActionResult OnPostApplyCoupon()
         {
-            Cart cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
+            cart = SessionHelper.GetObjectFromJson(HttpContext.Session, "cart");
             try
             {
                 var coupon = coupons.ValidateCoupon(CouponCode);
-                cart.AddCupon(coupon);
+                cart.SetCoupon(coupon);
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
                 return RedirectToPage("Checkout");
             }

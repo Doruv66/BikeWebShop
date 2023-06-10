@@ -1,4 +1,5 @@
 ﻿using BikeClassLibrary;
+using BikeLibrary.BLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -118,6 +119,29 @@ namespace TestsBikeUniverse
 
             //Act & Assert
             Assert.ThrowsException<ArgumentException>(() => inventory.UpdateBike(bike.GetId(), price, stock, img));
+        }
+
+        [TestMethod]
+        public void GetAll_ShouldReturnAllBikes()
+        {
+            // Arrange
+            Inventory inventory = GetMockInvenotry();
+            var bikes = new List<Bike>{
+            new Bike(1, "giant", 299.99, 34, new byte[1], BikeType.MountainBike),
+            new Bike(2, "giant", 299.99, 34, new byte[1], BikeType.MountainBike),
+            new Bike(3, "giant", 299.99, 34, new byte[1], BikeType.MountainBike),
+            };
+
+            foreach(var b in bikes)
+            {
+                inventory.AddBike(b);
+            }
+
+            // Act
+            var result = inventory.GetBikes();
+
+            // Assert
+            CollectionAssert.AreEquivalent(bikes, result);
         }
 
         private Inventory GetMockInvenotry()
